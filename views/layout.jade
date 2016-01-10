@@ -1,7 +1,30 @@
 doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        meta(name="description" content="")
+        meta(name="author" content="")
+        title index
+        link(href="stylesheets/bootstrap.min.css" rel="stylesheet")
+        link(href="stylesheets/offcanvas.css" rel="stylesheet")
+    body
+        nav.navbar.navbar-fixed-top.navbar-inverse
+            .container
+                .navbar-header
+                    button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar")
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+
+                    a(class="navbar-brand" href="#") Project name
+
+                div#navbar.collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li.active
+                            a(href="#home") Home
+                        li.active
+                            a(href="#about") About
     block content
