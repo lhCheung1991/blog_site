@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node ./bin/www"
   },
-  // npm will install all of the dependencies depending upon package.json
-  // all the modules installed by npm will be placed in node_modules
+  
   "dependencies": {
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
@@ -17,5 +16,7 @@
     "serve-favicon": "~2.3.0",
     "mongodb":"~2.0.33",
     "monk":"~1.0.1"
-  }
+  },
+  
+  "__comment__":"npm will install all of the dependencies depending upon package.json, all the modules installed by npm will be placed in node_modules"
 }
