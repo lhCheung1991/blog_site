@@ -13,4 +13,9 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'GOGOGO' });
 });
 
+router.get("/helloworld", function (req, res)
+{
+    res.render("helloworld", {title: "damn it"});
+});
+
 module.exports = router;
