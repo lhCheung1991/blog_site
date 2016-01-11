@@ -4,32 +4,38 @@ html(lang="en")
         meta(charset="utf-8")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1")
-        meta(name="description" content="")
-        meta(name="author" content="")
+        // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
         title Linghan Cheung 's Site
+        
+        
+        // Bootstrap 
         link(href="stylesheets/bootstrap.min.css" rel="stylesheet")
-        link(href="stylesheets/offcanvas.css" rel="stylesheet")
+        // style.css
+        link(href="stylesheets/style.css" rel="stylesheet")
+        // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+        // WARNING: Respond.js doesn't work if you view the page via file://
+        // [if lt IE 9]
+        //- script(src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js")
+        //- script(src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js")
+        // [endif]
+        block individual_css
+
     body
-        nav.navbar.navbar-fixed-top.navbar-inverse
-            .container
-                .navbar-header
-                    button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar")
-                        span.sr-only Toggle navigation
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-
-                    a(class="navbar-brand" href="#") Linghan Cheung 's Site
-
-                div#navbar.collapse.navbar-collapse
-                    ul.nav.navbar-nav
-                        li.active
-                            a(href="#home") Home
-                        li
-                            a(href="#about") About
-    block content
-    
-    hr
-    footer
-        p &copy; Linghan Cheung Powered by Node.js
+        
+        
+        //- navigator bar
+        nav(class="navbar navbar-inverse navbar-fixed-top")
+            .container-fluid
+                p(class="navbar-text navbar-left") 
+                    a(href="#" class="navbar-link") Linghan Cheung 's Site
+                
+        block content
+        // jQuery (necessary for Bootstrap's JavaScript plugins)
+        script(src="javascripts/jquery-2.1.0.min.js")
+        // Include all compiled plugins (below), or include individual files as needed
+        script(src="javascripts/bootstrap.min.js")
+        
+        hr
+        foot.footer
+            p &copy; Linghan Cheung Powered by Node.js
         

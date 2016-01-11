@@ -1,6 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    h1= title.title
+    p= title.content
+    p last time #{title.last_edit}
   

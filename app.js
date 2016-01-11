@@ -5,6 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// require mongo modules
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk("127.0.0.1:27017/blog_site_db");
+
 // Routes are kind of like a combination of models and controllers in this setup, 
 // they direct traffic and also contain some programming logic
 var routes = require('./routes/index');
@@ -18,6 +23,9 @@ var app = express();    // instantiates Express
 app.set('views', path.join(__dirname, 'views'));    // location of jade files 
 app.set('view engine', 'jade');
 
+/**
+ * establishing middleware for Express
+ */
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -30,6 +38,13 @@ app.use(express.static(path.join(__dirname, 'public')));    // telling Express t
  * This directives are telling Express 
  * what route files to use.
  */
+
+app.use(function(req, res, next)
+{
+    req.db = db;
+    next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
 /************route section******************/

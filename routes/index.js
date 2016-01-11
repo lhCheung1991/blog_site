@@ -10,12 +10,27 @@ var router = express.Router();
  */
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'GOGOGO' });
+    res.render('artical', { title: 'GOGOGO' });
 });
 
 router.get("/helloworld", function (req, res)
 {
-    res.render("helloworld", {title: "damn it"});
+    var db = req.db;
+    var blogsCollection = db.get("blogs");
+    blogsCollection.find({}, {}, function (e, result)
+    {
+        try
+        {
+           res.render("index", {title:result[0]}); 
+           console.log(result);
+        }
+        catch(e)
+        {
+            console.log(e);            
+        }
+        
+    });
+
 });
 
 module.exports = router;
