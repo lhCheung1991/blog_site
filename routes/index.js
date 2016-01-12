@@ -9,22 +9,35 @@ var router = express.Router();
  * Finally we export our router function back to our app.
  */
 
-/* GET home page. */
-router.get('/', function(req, res, next) 
-{
-    /**
-     * A route method is derived from one of the HTTP methods, 
-     * and is attached to an instance of the express class.
-     */
-    res.render("index", {});
-});
+/**
+ * Use the express.Router class to create modular, mountable route handlers. 
+ * A Router instance is a complete middleware and routing system
+ */
 
 /**
- * used for loading middleware functions at a path for all request methods
+ * Middleware functions are functions that have access to the request object (req), 
+ * the response object (res), and the next middleware function in the application’s request-response cycle. 
+ * The next middleware function is commonly denoted by a variable named next.
  */
-router.all("/", function(req, res, next)
+
+/* GET home page. */
+router.get('/ohoho', function(req, res, next) 
 {
-    next(); // pass control to the next handler
+    console.log(req.originalUrl + "1");
+    next();
+    
+}, function(req, res, next)
+{
+    console.log(req.originalUrl + "2");
+    res.end();
+}
+);
+
+router.get("/", function(req, res, next)
+{
+    console.log(req.originalUrl + "3");
+    res.end();
 });
+
 
 module.exports = router;
