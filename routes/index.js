@@ -8,29 +8,23 @@ var router = express.Router();
  * HTTP get the top level directory of our website. 
  * Finally we export our router function back to our app.
  */
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('artical', { title: 'GOGOGO' });
+router.get('/', function(req, res, next) 
+{
+    /**
+     * A route method is derived from one of the HTTP methods, 
+     * and is attached to an instance of the express class.
+     */
+    res.render("index", {});
 });
 
-router.get("/helloworld", function (req, res)
+/**
+ * used for loading middleware functions at a path for all request methods
+ */
+router.all("/", function(req, res, next)
 {
-    var db = req.db;
-    var blogsCollection = db.get("blogs");
-    blogsCollection.find({}, {}, function (e, result)
-    {
-        try
-        {
-           res.render("index", {title:result[0]}); 
-           console.log(result);
-        }
-        catch(e)
-        {
-            console.log(e);            
-        }
-        
-    });
-
+    next(); // pass control to the next handler
 });
 
 module.exports = router;
