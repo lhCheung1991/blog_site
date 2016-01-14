@@ -24,7 +24,7 @@ var router = express.Router();
 router.get('/ohoho', function(req, res, next) 
 {
     console.log(req.originalUrl + "1");
-    next();
+    res.render("index", {title:{}});
     
 }, function(req, res, next)
 {
