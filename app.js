@@ -22,6 +22,7 @@ var app = express();    // instantiates Express
  */
 app.set('views', path.join(__dirname, 'views'));    // location of template files
 app.set('view engine', 'jade');    // don't need to specify the file extension .jade
+app.set("json spaces", 40);
 
 /**
  * Application-level middleware
@@ -51,15 +52,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));    // telling Express to serve static objects from the /public/ dir, 
-                                                            // but to make them actually seem like they're coming from the top level
-                                                            // The root argument specifies the root directory from which to serve static assets
+                                                            // but to make them actually seem like they're coming from the top level                                                           // The root argument specifies the root directory from which to serve static assets
+app.use("/admin", express.static(path.join(__dirname, 'public')));
 /************route section******************/
 /**
  * This directives are telling Express 
  * what route files to use.
  */
 
-app.use('/ahaha', routes);
+app.use('/', routes);
 app.use('/users', users);
 app.use("/admin", adminRouter);
 /************route section******************/

@@ -5,18 +5,17 @@
   "scripts": {
     "start": "DEBUG=express:* node ./bin/www"
   },
-  
   "dependencies": {
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "jade": "~1.11.0",
+    "mongodb": "~2.1.3",
+    "monk": "~1.0.1",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "mongodb":"~2.1.3",
-    "monk":"~1.0.1"
+    "ueditor-nodejs": "^0.1.2"
   },
-  
-  "__comment__":"npm will install all of the dependencies depending upon package.json, all the modules installed by npm will be placed in node_modules"
+  "__comment__": "npm will install all of the dependencies depending upon package.json, all the modules installed by npm will be placed in node_modules"
 }
