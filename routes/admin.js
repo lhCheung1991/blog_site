@@ -2,14 +2,14 @@
 
 var express = require("express");
 var adminRouter = express.Router();
-var ueditorController = require("../react/controller");
+var ueditorController = require("../react/ueditor_controller");
 
-adminRouter.all("/edit", ueditorController);
-
-adminRouter.get("/", function(req, res, next)
+adminRouter.get("/edit", function (req, res, next)
 {
-    
+    res.render("edit", {});
 });
+
+adminRouter.all("/edit/control", ueditorController());
 
 
 

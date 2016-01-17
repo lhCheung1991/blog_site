@@ -7,6 +7,10 @@ block content
     //- 加载编辑器的容器
     form(action="/admin/edit" method="post")
         script#container(name="content" type="text/plain") 这里写你的初始化内容
+        
+        button(type="button" class="btn btn-primary") 保存
+        button(type="button" class="btn btn-success" id="publishBtn") 发布
+    
     //- 配置文件
     script(type="text/javascript" src="ueditor/ueditor.config.js")
     //- 编辑器源码文件
@@ -14,6 +18,14 @@ block content
     //- 实例化编辑器
     script(type="text/javascript") 
         | // admin/edit?action=config
-        | var ue = UE.getEditor('container', {serverUrl: "/admin/edit"});
+        | var ue = UE.getEditor('container', {serverUrl: "/admin/edit/control"});
         | console.log(ue.getOpt("serverUrl")); 
-        | //ue.on("serverConfigLoaded", function(){console.log(ue.getOpt("imageActionName"));});
+        | ue.on("serverConfigLoaded", function(){console.log(ue.getOpt("imageActionName"));});
+    script(type="text/javascript" src="javascripts/editor.js")
+    
+    div(class="alert alert-success" role="alert")
+        p 文章保存成功 !
+    div(class="alert alert-warning" role="alert")
+        p 文章正在保存中......
+    div(class="alert alert-danger" role="alert")
+        p 文章保存失败 !
