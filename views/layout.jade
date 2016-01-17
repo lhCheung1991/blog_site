@@ -30,13 +30,17 @@ html(lang="en")
                     a(href="#" class="navbar-link") Linghan Cheung 's Site
         //- navigator bar end
                 
-        block content
+        
         // jQuery (necessary for Bootstrap's JavaScript plugins)
         script(src="javascripts/jquery-2.1.0.min.js")
         // Include all compiled plugins (below), or include individual files as needed
         script(src="javascripts/bootstrap.min.js")
         
-        hr
-        foot.footer
-            p &copy; Linghan Cheung Powered by Node.js
+        block content
+        
+        #footerHr
+            hr
+            foot.footer
+                p &copy; Linghan Cheung Powered by Node.js
+                p 京IPC备号
         
