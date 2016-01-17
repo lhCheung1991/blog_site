@@ -16,16 +16,11 @@ block content
     //- 编辑器源码文件
     script(type="text/javascript" src="ueditor/ueditor.all.js")
     //- 实例化编辑器
-    script(type="text/javascript") 
-        | // admin/edit?action=config
-        | var ue = UE.getEditor('container', {serverUrl: "/admin/edit/control"});
-        | console.log(ue.getOpt("serverUrl")); 
-        | ue.on("serverConfigLoaded", function(){console.log(ue.getOpt("imageActionName"));});
     script(type="text/javascript" src="javascripts/editor.js")
     
     div(class="alert alert-success" role="alert")
-        p 文章保存成功 !
-    div(class="alert alert-warning" role="alert")
-        p 文章正在保存中......
+        p(style="text-align: center") 文章保存成功 !
+    div(class="alert alert-info" role="alert")
+        p(style="text-align: center") 文章正在保存中......
     div(class="alert alert-danger" role="alert")
-        p 文章保存失败 !
+        p(style="text-align: center") 文章保存失败 !
