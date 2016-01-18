@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    div.container
+        h1(style="text-align:center") Blog Editor
+        div.row
+            div.col-sm-9
+                //- 加载编辑器的容器
+                form(action="/admin/edit" method="post")
+                    script#container(name="content" type="text/plain")
+            div.col-sm-3
+                //- blog extra informaiton
+                h4(style="text-align: center") 文章附加信息
+                form.form-horizontal
+                    div.row
+                        div.form-group
+                            label(for="titleInput" class="col-sm-3 control-label") 标题
+                            div.col-sm-9
+                                input(type="text" class="form-control" id="titleInput")
+                    div.row
+                        //- Content should be placed within columns, and only columns may be immediate children of rows.
+                        div.form-group
+                            span.col-sm-3
+                            button.col-sm-3(type="button" class="btn btn-primary") 保存
+                            span.col-sm-3
+                            button.col-sm-3(type="button" class="btn btn-success" id="publishBtn") 发布
+    //- 配置文件
+    script(type="text/javascript" src="ueditor/ueditor.config.js")
+    //- 编辑器源码文件
+    script(type="text/javascript" src="ueditor/ueditor.all.js")
+    //- 实例化编辑器
+    script(type="text/javascript" src="javascripts/editor.js")
+            
+    //- alert bar
+    div(class="alert alert-success" role="alert")
+        p(style="text-align: center") 文章保存成功 !
+    div(class="alert alert-info" role="alert")
+        p(style="text-align: center") 文章正在保存中......
+    div(class="alert alert-danger" role="alert")
+        p(style="text-align: center") 文章保存失败 !
