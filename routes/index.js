@@ -21,22 +21,9 @@ var router = express.Router();
  */
 
 /* GET home page. */
-router.get('/ohoho', function(req, res, next) 
+router.get('/', function(req, res, next) 
 {
-    console.log(req.originalUrl + "1");
-    res.render("index", {title:{}});
-    
-}, function(req, res, next)
-{
-    console.log(req.originalUrl + "2");
-    res.end();
-}
-);
-
-router.get("/", function(req, res, next)
-{
-    console.log(req.originalUrl + "3");
-    res.end();
+    res.render("artical", {});
 });
 
 

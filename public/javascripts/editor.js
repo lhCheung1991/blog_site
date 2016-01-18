@@ -5,7 +5,7 @@ $(function ()
     var ue = UE.getEditor('container', 
     {
         serverUrl: "/admin/edit/control", 
-        initialFrameHeight: 500
+        initialFrameHeight: 300
     });
     console.log(ue.getOpt("serverUrl")); 
     ue.on("serverConfigLoaded", function(){console.log(ue.getOpt("imageActionName"));});

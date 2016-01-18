@@ -49,7 +49,7 @@ app.set("json spaces", 40);
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));    // telling Express to serve static objects from the /public/ dir, 
                                                             // but to make them actually seem like they're coming from the top level                                                           // The root argument specifies the root directory from which to serve static assets
