@@ -51,4 +51,23 @@ dbtools.saveNewBlog = function (newBlog)
     });
 };
 
+/**
+ * When executing a query with a callback function, you specify your query as a JSON document.
+ * The JSON document's syntax is the same as the MongoDB shell.
+ * /
+
+/**
+ * All callbacks in Mongoose use the pattern: callback(error, result)
+ * What results is depends on the operation: For findOne() it is a potentially-null single document, 
+ * find() a list of documents, count() the number of documents, update() the number of documents affected, etc
+ */
+
+dbtools.getAllBlogs = function (callback)
+{
+    BlogModel.find({}, {}, function(error, result)
+    {
+        callback(error, result);
+    });
+}
+
 module.exports = dbtools;
