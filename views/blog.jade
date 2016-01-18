@@ -1,0 +1,25 @@
+extend layout
+
+block individual_css
+    link(href="stylesheets/blog.css" rel="stylesheet") 
+
+block content
+    //- the blog container
+    div.container 
+        //- artical header begin
+        div.blog-header
+            h1.blog-title
+            p.lead.blog-description 最后编辑时间: #{blog.lastEidtDate}
+        //- artical header end
+        
+        //- blog row begin
+        div.row
+            div.col-sm-8.blog-main
+                div.blog-post
+                    //- last edited date
+                    //- p.blog-post-meta
+                    !{blog.content}
+            div.col-sm-3.col-sm-offset-1.blog-sidebar
+                div.sidebar-module.sidebar-module-inset 文章导引
+                div.sidebar-module
+        //- blog row end            
