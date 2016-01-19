@@ -66,7 +66,31 @@ dbtools.saveNewBlog = function (newBlog, callback)
 
 dbtools.getAllBlogs = function (callback)
 {
-    BlogModel.find({}, {}, function(error, result)
+    BlogModel.find({}, "_id title lastEidtDate", function(error, result)
+    {
+        callback(error, result);
+    });
+}
+
+dbtools.getAllBlogsCount = function (callback)
+{
+    BlogModel.count({}, function(error, count)
+    {
+        console.log("Number of all blogs " + count);
+        callback(error, count);
+    });
+}
+
+dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
+{
+    var query = BlogModel.
+                find({}).
+                select("_id title lastEidtDate").
+                sort({lastEidtDate: -1}).
+                skip((pageNum - 1) * blogsPerPage).
+                limit(blogsPerPage);
+    
+    query.exec(function(error, result)
     {
         callback(error, result);
     });

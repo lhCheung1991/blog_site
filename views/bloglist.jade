@@ -26,9 +26,11 @@ block content
             div.col-sm-1 页面跳转: 
             div.col-sm-11
                 div.btn-toolbar
-                    div.btn-group
-                        - var pagesIdx = 1
-                        while pagesIdx <= pagesCnt
-                            button(type="button" class="btn")= pagesIdx++
-            
+                    div#changePageDiv.btn-group
+                        form(action="" method="get" id="changePageForm")
+                            input(id="pageNumInput" type="hidden" name="pageNum" value="1")
+                            - var pagesIdx = 1
+                            while pagesIdx <= pagesCnt
+                                button(type="button" class="btn")= pagesIdx++
+    script(src="javascripts/bloglist.js")    
                                                                      
