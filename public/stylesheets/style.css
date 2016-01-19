@@ -1,7 +1,8 @@
 body 
 {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
   padding-top: 50px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 a 
