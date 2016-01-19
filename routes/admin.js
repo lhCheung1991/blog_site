@@ -3,14 +3,14 @@
 var express = require("express");
 var adminRouter = express.Router();
 var ueditorController = require("../react/ueditor_controller");
-var editor = require("../react/editor");
+var blogeditor = require("../react/blogeditor");
 
-adminRouter.get("/editor", function (req, res, next)
+adminRouter.get("/blogeditor", function (req, res, next)
 {
-    res.render("editor", {});
+    res.render("blogeditor", {});
 });
 
-adminRouter.all("/editor/control", ueditorController(
+adminRouter.all("/blogeditor/control", ueditorController(
     {
         rootDir: "/Users/lhcheung1991/VScodeProjects/blog_site/",
         imagesDir: "public/images/",
@@ -19,6 +19,6 @@ adminRouter.all("/editor/control", ueditorController(
     }
 ));
 
-adminRouter.post("/editor/store", editor);
+adminRouter.post("/blogeditor/store", blogeditor);
 
 module.exports = adminRouter;

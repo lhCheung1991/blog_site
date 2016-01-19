@@ -1,0 +1,45 @@
+extends layout
+
+block content
+    div.container
+        h1(style="text-align:center") Blog Editor
+        div.row
+            div.col-sm-9
+                //- 加载编辑器的容器
+                form(action="/admin/editor" method="post")
+                    script#container(name="content" type="text/plain")
+            div.col-sm-3
+                //- blog extra informaiton
+                h4(style="text-align: center") 文章附加信息
+                form.form-horizontal
+                    div.form-group
+                        div.row
+                            label(for="titleInput" class="col-sm-3 control-label") 标题
+                            div.col-sm-9
+                                input(type="text" class="form-control" id="titleInput")
+                        //- Content should be placed within columns, and only columns may be immediate children of rows.
+                    div.form-group
+                        div.row
+                            span.col-sm-3
+                            button.col-sm-3(type="button" class="btn btn-primary") 保存
+                            span.col-sm-3
+                            button.col-sm-3(type="button" class="btn btn-success" id="publishBtn") 发布
+                    //- alert bar
+                    div.form-group
+                        div.row
+                            div(class="alert alert-success .col-sm-12" role="alert" style="display: none")
+                                p(style="text-align: center") 文章保存成功 !
+                        div.row
+                            div(class="alert alert-info .col-sm-12" role="alert" style="display: none")
+                                p(style="text-align: center") 文章正在保存中......
+                        div.row
+                            div(class="alert alert-danger .col-sm-12" role="alert" style="display: none")
+                                p(style="text-align: center") 文章保存失败 !
+    //- 配置文件
+    script(type="text/javascript" src="ueditor/ueditor.config.js")
+    //- 编辑器源码文件
+    script(type="text/javascript" src="ueditor/ueditor.all.js")
+    //- 实例化编辑器
+    script(type="text/javascript" src="javascripts/blogeditor.js")
+            
+    
