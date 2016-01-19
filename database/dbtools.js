@@ -33,9 +33,10 @@ var BlogsSchema = new Schema(
 
 var BlogModel = mongoose.model("blogs", BlogsSchema);
 
-dbtools.saveNewBlog = function (newBlog)
+dbtools.saveNewBlog = function (newBlog, callback)
 {
     var blog = new BlogModel();
+    blog.title = newBlog.title;
     blog.content = newBlog.content;
     
     blog.save(function (error)
@@ -46,8 +47,9 @@ dbtools.saveNewBlog = function (newBlog)
         }
         else
         {
-            console.error("Save" + blog);
+            console.log("Save" + blog);
         }
+        callback(error);
     });
 };
 
