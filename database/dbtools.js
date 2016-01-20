@@ -1,6 +1,7 @@
 "use strict";
 
 var mongoose = require("mongoose");
+var ObjectId = mongoose.Types.ObjectId;
 var dbtools = {};
 /**
  * Mongoose buffers all the commands until it's connected to the database. 
@@ -91,6 +92,16 @@ dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
                 limit(blogsPerPage);
     
     query.exec(function(error, result)
+    {
+        callback(error, result);
+    });
+}
+
+dbtools.getBlogById = function (blogId, callback)
+{
+    var query = BlogModel.findById(ObjectId(blogId));
+    query.select("title content lastEidtDate");
+    query.exec(function (error, result)
     {
         callback(error, result);
     });

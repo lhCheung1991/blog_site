@@ -6,11 +6,12 @@ block content
             h1 文章列表
         div.row
             div.col-sm-12  
-                table.table.table-hover
+                table#blogTable.table.table-hover
                     tr
                         th 文章编号
                         th 文章标题
                         th 文章最后修改日期
+                        th 查看
                         th 编辑
                         th 删除
                     each blog, idx in blogs
@@ -19,15 +20,25 @@ block content
                             td= blog.title
                             td= blog.lastEidtDate
                             td
+                                button(type="button" class="btn btn-success") 查看
+                            td
                                 button(type="button" class="btn btn-primary") 编辑
                             td
-                                button(type="button" class="btn btn-danger") 删除
+                                button(type="button" class="btn btn-danger") 删除 
+        div.row
+            div.col-sm-12
+                form#controlBlogForm(action="/admin/bloglist" method="get")
+                    //- checkBlog, editBlog, deleteBlog
+                    input#blogControlActionInput(name="action" value="" type="hidden")
+                    input#blogIdInput(name="blogId" value="" type="hidden")
+                    
         div.row
             div.col-sm-1 页面跳转: 
             div.col-sm-11
                 div.btn-toolbar
                     div#changePageDiv.btn-group
-                        form(action="" method="get" id="changePageForm")
+                        form(action="/admin/bloglist" method="get" id="changePageForm")
+                            input(id="actionInput" type="hidden" name="action" value="getBlogsPage")
                             input(id="pageNumInput" type="hidden" name="pageNum" value="1")
                             - var pagesIdx = 1
                             while pagesIdx <= pagesCnt

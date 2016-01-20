@@ -7,12 +7,9 @@ var bodyParser = require('body-parser');
 
 // Routes are kind of like a combination of models and controllers in this setup, 
 // they direct traffic and also contain some programming logic
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var adminRouter = require("./routes/admin");
-
+var blogsRouter = require("./routes/blogs");
 var app = express();    // instantiates Express
-
 /**
  * Before Express can render template files, the following application settings must be set:
  *    -views, the directory where the template files are located
@@ -23,7 +20,6 @@ var app = express();    // instantiates Express
 app.set('views', path.join(__dirname, 'views'));    // location of template files
 app.set('view engine', 'jade');    // don't need to specify the file extension .jade
 app.set("json spaces", 40);
-
 /**
  * Application-level middleware
  *     -Bind application-level middleware to an instance of the app object 
@@ -54,15 +50,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));    // telling Express to serve static objects from the /public/ dir, 
                                                             // but to make them actually seem like they're coming from the top level                                                           // The root argument specifies the root directory from which to serve static assets
 app.use("/admin", express.static(path.join(__dirname, 'public')));
+app.use("/index", express.static(path.join(__dirname, 'public')));
 /************route section******************/
 /**
  * This directives are telling Express 
  * what route files to use.
  */
-
-app.use('/', routes);
-app.use('/users', users);
 app.use("/admin", adminRouter);
+app.use("/index", blogsRouter);
 /************route section******************/
 
 /**
