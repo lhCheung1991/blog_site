@@ -26,4 +26,9 @@ $(function()
         $("#editBlogByIdInput").val($(blogIdTd).html());
         $("#editBlogByIdForm").submit();
     });
+    
+    $("#newBlogIconDiv button.btn.btn-danger").on("click", function()
+    {
+        
+    });
 });

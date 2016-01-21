@@ -74,7 +74,29 @@ $(function ()
         }
         else    // update a blog
         {
+            $(".alert.alert-info").slideDown("slow");
             
+            var updatedBlogObj = {};
+            updatedBlogObj.title = $("#titleInput").val();
+            updatedBlogObj.content = ue.getContent();
+            
+            $.ajax("/admin/blogeditor/updateblog/pushupdatedblog", {
+                method: "post",
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                data: {blogId: blogIdString, updatedBlog: updatedBlogObj}
+            })
+            .done(function(data)
+            {
+                console.log("Update blog successfully");
+                $(".alert.alert-info").hide();
+                $(".alert.alert-success").slideDown("slow");
+            })
+            .fail(function(xhr, status)
+            {
+                console.log("Update blog failed");
+                $(".alert.alert-info").hide();
+                $(".alert.alert-danger").slideDown("slow");
+            });
         }
     });
 }

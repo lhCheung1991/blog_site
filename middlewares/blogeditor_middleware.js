@@ -3,31 +3,6 @@
 var dbtools = require("../database/dbtools");
 var blogEditorMiddleware = {};
 
-// var editor = function (req, res, next)
-// {
-//     console.log(req.body);
-//     dbtools.saveNewBlog(req.body, function(error)
-//     {
-//         if (error)
-//         {
-//             res.status(500).end();
-//         }
-//         else
-//         {
-//             res.status(200).end();
-//         }
-//     });
-    
-//     var action = req.query.action;
-//     switch(action)
-//     {
-//         case "editBlog":
-//             break;
-//         case "insertBlog":
-//             break;
-//     }
-// };
-
 blogEditorMiddleware.checkoutBlogById = function ()
 {
     function __checkoutBlogById(req, res, next)
@@ -67,6 +42,28 @@ blogEditorMiddleware.pulloutBlogById = function ()
     }
     
     return __pulloutBlogById;
+}
+
+blogEditorMiddleware.pushUpdatedBlogById = function ()
+{
+    function pushUpdatedBlogById(req, res, next)
+    {
+        var blogId = req.body.blogId;
+        var updatedBlog = req.body.updatedBlog;
+        dbtools.updateBlogById(blogId, updatedBlog, function(error, result)
+        {
+            if (error)
+            {
+                res.status(500).end();
+            }
+            else
+            {
+                res.status(200).end();
+            }
+        });
+    }
+    
+    return pushUpdatedBlogById;
 }
 
 blogEditorMiddleware.checkoutPlainEditor = function ()

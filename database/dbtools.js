@@ -106,4 +106,18 @@ dbtools.getBlogById = function (blogId, callback)
     });
 }
 
+dbtools.updateBlogById = function (blogId, updatedBlog, callback)
+{
+    var blog = {};
+    blog.title = updatedBlog.title;
+    blog.content = updatedBlog.content;
+    blog.lastEidtDate = Date.now();
+    
+    var queryAndUpdate = BlogModel.findOneAndUpdate({"_id": ObjectId(blogId)}, blog);
+    queryAndUpdate.exec(function (error, result)
+    {
+        callback(error, result);
+    });
+}
+
 module.exports = dbtools;
