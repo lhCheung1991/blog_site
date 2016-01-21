@@ -11,8 +11,14 @@ block content
                     script#container(name="content" type="text/plain")
             div.col-sm-3
                 //- blog extra informaiton
-                h4(style="text-align: center") 文章附加信息
+                div.page-header
+                    h4 文章附加信息
                 form.form-horizontal
+                    div.form-group
+                        div.row
+                            label(for="blogIdInput" class="col-sm-3 control-label") 编号
+                            div.col-sm-9
+                                span#blogIdSpan= blogId
                     div.form-group
                         div.row
                             label(for="titleInput" class="col-sm-3 control-label") 标题

@@ -4,6 +4,8 @@ block content
     div.container
         div.page-header
             h1 文章列表
+        div#newBlogIconDiv(style="float: right; width: 50px; height: 50px;")
+            span.glyphicon.glyphicon-plus(data-toggle="tooltip" data-placement="top" title="撰写新文章")
         div.row
             div.col-sm-12  
                 table#blogTable.table.table-hover
@@ -24,24 +26,29 @@ block content
                             td
                                 button(type="button" class="btn btn-primary") 编辑
                             td
-                                button(type="button" class="btn btn-danger") 删除 
+                                button(type="button" class="btn btn-danger") 删除
         div.row
             div.col-sm-12
-                form#controlBlogForm(action="/admin/bloglist" method="get")
-                    //- checkBlog, editBlog, deleteBlog
-                    input#blogControlActionInput(name="action" value="" type="hidden")
-                    input#blogIdInput(name="blogId" value="" type="hidden")
+                form#checkBlogByIdForm(action="/blogs/checkblog" method="get")
+                    input#checkBlogByIdInput(type="hidden" name="blogId" value="")
+                form#editBlogByIdForm(action="/admin/blogeditor/updateblog/checkout" method="get")
+                    input#editBlogByIdInput(type="hidden" name="blogId" value="") 
                     
         div.row
             div.col-sm-1 页面跳转: 
             div.col-sm-11
                 div.btn-toolbar
-                    div#changePageDiv.btn-group
-                        form(action="/admin/bloglist" method="get" id="changePageForm")
-                            input(id="actionInput" type="hidden" name="action" value="getBlogsPage")
-                            input(id="pageNumInput" type="hidden" name="pageNum" value="1")
-                            - var pagesIdx = 1
-                            while pagesIdx <= pagesCnt
-                                button(type="button" class="btn")= pagesIdx++
+                    div#changePageDiv.btn-group  
+                        - var pagesIdx = 1
+                        while pagesIdx <= pagesCnt
+                            button(type="button" class="btn")= pagesIdx++
+        div.row
+            div.col-sm-12
+                //- change page form
+                form#changePageForm(action="/admin/bloglist" method="get")
+                    input#pageNumInput(type="hidden" name="pageNum" value="1")
+                //- this input will not be GET, it is for color the current page number button
+                input#curPageNumInput(type="hidden" value="#{curPageNum}")
+                
     script(src="javascripts/bloglist.js")    
                                                                      

@@ -77,7 +77,6 @@ dbtools.getAllBlogsCount = function (callback)
 {
     BlogModel.count({}, function(error, count)
     {
-        console.log("Number of all blogs " + count);
         callback(error, count);
     });
 }
@@ -100,7 +99,7 @@ dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
 dbtools.getBlogById = function (blogId, callback)
 {
     var query = BlogModel.findById(ObjectId(blogId));
-    query.select("title content lastEidtDate");
+    query.select("_id title content lastEidtDate");
     query.exec(function (error, result)
     {
         callback(error, result);

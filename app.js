@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 
 // Routes are kind of like a combination of models and controllers in this setup, 
 // they direct traffic and also contain some programming logic
-var adminRouter = require("./routes/admin");
-var blogsRouter = require("./routes/blogs");
+var adminRouter = require("./routes/admin_router");
+var blogsRouter = require("./routes/blogs_router");
 var app = express();    // instantiates Express
 /**
  * Before Express can render template files, the following application settings must be set:
@@ -45,19 +45,21 @@ app.set("json spaces", 40);
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));    // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));    // telling Express to serve static objects from the /public/ dir, 
                                                             // but to make them actually seem like they're coming from the top level                                                           // The root argument specifies the root directory from which to serve static assets
 app.use("/admin", express.static(path.join(__dirname, 'public')));
-app.use("/index", express.static(path.join(__dirname, 'public')));
+app.use("/admin/blogeditor/updateblog", express.static(path.join(__dirname, 'public')));
+app.use("/admin/blogeditor/newblog", express.static(path.join(__dirname, 'public')));
+app.use("/blogs", express.static(path.join(__dirname, 'public')));
 /************route section******************/
 /**
  * This directives are telling Express 
  * what route files to use.
  */
-app.use("/admin", adminRouter);
-app.use("/index", blogsRouter);
+app.use("/admin", adminRouter);    // the administer entry
+app.use("/blogs", blogsRouter);    // the blogs entry
 /************route section******************/
 
 /**
