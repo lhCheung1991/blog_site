@@ -16,10 +16,12 @@ adminRouter.all("/blogeditor/controller", ueditorController(
         configJsonFile: "/Users/lhcheung1991/VScodeProjects/blog_site/middlewares/config.json"
     })
 );
+
 adminRouter.get("/blogeditor/updateblog/checkout", blogEditorMiddleware.checkoutBlogById());    // admin/blogeditor/updateblog/checkout?blogId=x
 adminRouter.get("/blogeditor/updateblog/pullout", blogEditorMiddleware.pulloutBlogById());
 adminRouter.post("/blogeditor/updateblog/pushupdatedblog", blogEditorMiddleware.pushUpdatedBlogById());    // /admin/blogeditor/updateblog/pushupdatedblog
 adminRouter.get("/blogeditor/newblog/plaineditor", blogEditorMiddleware.checkoutPlainEditor());
 adminRouter.post("/blogeditor/newblog/pushnewblog", blogEditorMiddleware.pushNewBlog());
+adminRouter.get("/bloglist/removeblog", bloglistMiddleware.removeBlogById());
 
 module.exports = adminRouter;

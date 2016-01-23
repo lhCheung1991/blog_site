@@ -27,8 +27,10 @@ $(function()
         $("#editBlogByIdForm").submit();
     });
     
-    $("#newBlogIconDiv button.btn.btn-danger").on("click", function()
+    $("#blogTable button.btn.btn-danger").bind("click", function()
     {
-        
+        var blogIdTd = $(this).parent().siblings()[0];
+        $("#removeBlogByIdInput").val($(blogIdTd).html());
+        $("#removeBlogByIdForm").submit();
     });
 });

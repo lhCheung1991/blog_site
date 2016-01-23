@@ -85,7 +85,7 @@ dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
 {
     var query = BlogModel.
                 find({}).
-                select("_id title lastEidtDate").
+                select("_id title content lastEidtDate").
                 sort({lastEidtDate: -1}).
                 skip((pageNum - 1) * blogsPerPage).
                 limit(blogsPerPage);
@@ -117,6 +117,15 @@ dbtools.updateBlogById = function (blogId, updatedBlog, callback)
     queryAndUpdate.exec(function (error, result)
     {
         callback(error, result);
+    });
+}
+
+dbtools.removeBlogById = function (blogId, callback)
+{
+    var removeQuery = BlogModel.remove({"_id": ObjectId(blogId)});
+    removeQuery.exec(function (error)
+    {
+        callback(error);
     });
 }
 

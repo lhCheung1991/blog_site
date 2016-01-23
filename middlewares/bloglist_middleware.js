@@ -4,30 +4,6 @@ var dbtools = require("../database/dbtools");
 var bloglistMiddleware = {};
 var blogsPerPage = 8;
 
-// var bloglist = function(req, res, next)
-// {   
-//     console.log(req.query.action);
-//     switch(req.query.action)
-//     {
-//         case "checkBlog":
-//             res.redirect("/index/blogs?blogId=" + req.query.blogId);
-//             break;
-//         case "insertBlog":
-//             break;
-//         case "editBlog":
-//             break;
-//         case "getBlogsPage":
-//             getBlogsPage(req, res, next);
-//             break;
-//         case "deleteBlog":
-//             break;
-//         case undefined:
-//             req.query.pageNum = 1;
-//             getBlogsPage(req, res, next);
-//             break;
-//     }
-// }
-
 bloglistMiddleware.getBlogListPageNum = function ()
 {
     function __getBlogListPageNum(req, res, next)
@@ -41,7 +17,7 @@ bloglistMiddleware.getBlogListPageNum = function ()
             }
             else
             {
-                var pages = count / blogsPerPage + 1;
+                var pages = Math.floor(count / blogsPerPage) + 1;
                 var pageNum = Number(req.query.pageNum || "1");
                 dbtools.getBlogsPageNum(pageNum, blogsPerPage, function(error, result)
                 {
@@ -61,6 +37,25 @@ bloglistMiddleware.getBlogListPageNum = function ()
     }
     
     return __getBlogListPageNum;
+}
+
+bloglistMiddleware.removeBlogById = function ()
+{
+    function __removeBlogById(req, res, next)
+    {
+        dbtools.removeBlogById(req.query.blogId, function(error)
+        {
+            if (error)
+            {
+                next();
+            }
+            else
+            {
+                res.redirect("/admin/bloglist");
+            }
+        });
+    }
+    return __removeBlogById;
 }
 
 module.exports = bloglistMiddleware;

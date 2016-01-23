@@ -33,6 +33,8 @@ block content
                     input#checkBlogByIdInput(type="hidden" name="blogId" value="")
                 form#editBlogByIdForm(action="/admin/blogeditor/updateblog/checkout" method="get")
                     input#editBlogByIdInput(type="hidden" name="blogId" value="") 
+                form#removeBlogByIdForm(action="/admin/bloglist/removeblog" method="get")
+                    input#removeBlogByIdInput(type="hidden" name="blogId" value="")
                     
         div.row
             div.col-sm-1 页面跳转: 
