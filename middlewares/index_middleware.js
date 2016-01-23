@@ -2,7 +2,7 @@
 
 var dbtools = require("../database/dbtools");
 var indexMiddleware = {};
-var blogsPerPage = 8;
+var blogsPerPage = 4;
 
 indexMiddleware.getBlogListPageNum = function ()
 {
