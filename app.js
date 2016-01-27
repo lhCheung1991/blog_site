@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 // Routes are kind of like a combination of models and controllers in this setup, 
 // they direct traffic and also contain some programming logic
 var indexRouter = require("./routes/index_router");
+var loginRouter = require("./routes/login_router");
 var adminRouter = require("./routes/admin_router");
 var blogsRouter = require("./routes/blogs_router");
 var app = express();    // instantiates Express
@@ -60,6 +61,7 @@ app.use("/blogs", express.static(path.join(__dirname, 'public')));
  * what route files to use.
  */
 app.use("/", indexRouter);
+app.use("/login", loginRouter);
 app.use("/admin", adminRouter);    // the administer entry
 app.use("/blogs", blogsRouter);    // the blogs entry
 /************route section******************/

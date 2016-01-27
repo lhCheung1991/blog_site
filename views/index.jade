@@ -1,5 +1,8 @@
 extends layout
 
+block individual_css
+    link(href="stylesheets/tagcloud.css" rel="stylesheet")
+
 block content
     div.container
         div.row
@@ -56,6 +59,17 @@ block content
                         p 
                             span Github: 
                             a(href="https://github.com/lhCheung1991") github.com/lhCheung1991
+                div.panel.panel-warning
+                    div.panel-heading
+                        h3.panel-title Tag Cloud
+                    div.panel-body
+                        //- tag cloud
+                        div#tagCloud
+                            ul#tagList
+                                li 
+                                    a(href="#") JavaScript
+                                li
+                                    a(href="#") C++
                 div.panel.panel-info
                     div.panel-heading
                         h3.panel-title 友情链接
