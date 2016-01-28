@@ -23,5 +23,8 @@ adminRouter.post("/blogeditor/updateblog/pushupdatedblog", blogEditorMiddleware.
 adminRouter.get("/blogeditor/newblog/plaineditor", blogEditorMiddleware.checkoutPlainEditor());
 adminRouter.post("/blogeditor/newblog/pushnewblog", blogEditorMiddleware.pushNewBlog());
 adminRouter.get("/bloglist/removeblog", bloglistMiddleware.removeBlogById());
+adminRouter.post("/blogeditor/newcollection", blogEditorMiddleware.saveNewBlogCollection());
+adminRouter.get("/blogeditor/blogcollections/checkout", blogEditorMiddleware.checkoutAllBlogCollections());
+adminRouter.post("/blogeditor/blogcollections/removecollection", blogEditorMiddleware.removeCollectionById());
 
 module.exports = adminRouter;

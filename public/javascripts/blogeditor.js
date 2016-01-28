@@ -2,10 +2,38 @@
 
 $(function ()
 {
+    /************get all blog collections*************/
+    function getAllBlogCollections()
+    {
+        $.ajax("/admin/blogeditor/blogcollections/checkout", {
+            method: "get",
+        })
+        .done(function(data)
+        {
+            updateBlogCollectionsSelect(data);
+        })
+        .fail(function(xhr, status)
+        {
+            
+        });
+    }
+
+    function updateBlogCollectionsSelect(collections)
+    {
+        $("#chooseCollectionSelect").empty();
+        $("#deleteCollectionSelect").empty();
+        for (let idx = 0; idx < collections.length; idx++)
+        {
+            $("#chooseCollectionSelect").append('<option value="' + collections[idx]._id + '">' + collections[idx].title + "</option>");
+            $("#deleteCollectionSelect").append('<option value="' + collections[idx]._id + '">' + collections[idx].title + "</option>");
+        }
+    }
+    /************get all blog collections*************/
+    
     var ue = UE.getEditor('container', 
     {
         serverUrl: "/admin/blogeditor/controller",    // request ueditor config.json
-        initialFrameHeight: 300
+        initialFrameHeight: 500
     });
     
     ue.on("serverConfigLoaded", function()
@@ -41,6 +69,8 @@ $(function ()
         {
             console.log("A new blog");
         }
+        // get all blog collection
+        getAllBlogCollections();
     });
     
     $("#publishBtn").bind("click", function ()
@@ -64,6 +94,11 @@ $(function ()
                 console.log("Save new blog successfully");
                 $(".alert.alert-info").hide();
                 $(".alert.alert-success").slideDown("slow");
+                window.setTimeout(function()
+                {
+                    $(".alert.alert-success").slideUp("slow");
+                },
+                2000);
             })
             .fail(function (xhr, status)
             {
@@ -87,9 +122,13 @@ $(function ()
             })
             .done(function(data)
             {
-                console.log("Update blog successfully");
                 $(".alert.alert-info").hide();
                 $(".alert.alert-success").slideDown("slow");
+                window.setTimeout(function()
+                {
+                    $(".alert.alert-success").slideUp("slow");
+                },
+                2000);
             })
             .fail(function(xhr, status)
             {
@@ -99,5 +138,66 @@ $(function ()
             });
         }
     });
+    
+    /******************add collection button***************/
+    $("#addCollectionBtn").bind("click", function ()
+    {
+        $(".alert.alert-info").slideDown("slow");
+        
+        var newCollectionTitle = $("#collectionInput").val();
+        $.ajax("/admin/blogeditor/newcollection", {
+            method: "post",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            data: {title: newCollectionTitle}
+        })
+        .done(function(data)
+        {
+            $(".alert.alert-info").hide();
+            $(".alert.alert-success").slideDown("slow");
+            getAllBlogCollections();
+            window.setTimeout(function()
+            {
+                $(".alert.alert-success").slideUp("slow");
+            },
+            2000);
+        })
+        .fail(function(xhr, status)
+        {
+            $(".alert.alert-info").hide();
+            $(".alert.alert-danger").slideDown("slow");
+        });
+    });
+    /******************add collection button***************/
+    
+    /******************delete collection button***************/
+    $("#deleteCollectionBtn").bind("click", function()
+    {
+        $(".alert.alert-info").slideDown("slow");
+        
+        var collectionId = $("#deleteCollectionSelect option:selected").val();
+        $.ajax("/admin/blogeditor/blogcollections/removecollection", {
+            method: "post",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            data: {_id: collectionId}
+        })
+        .done(function(data)
+        {
+            $(".alert.alert-info").hide();
+            $(".alert.alert-success").slideDown("slow");
+            getAllBlogCollections();
+            window.setTimeout(function()
+            {
+                $(".alert.alert-success").slideUp("slow");
+            },
+            2000);
+        })
+        .fail(function(xhr, status)
+        {
+            $(".alert.alert-info").hide();
+            $(".alert.alert-danger").slideDown("slow");
+        });
+    });
+    /******************delete collection button***************/
+    
 }
 );

@@ -28,17 +28,27 @@ var BlogsSchema = new Schema(
     {
         title: {type: String, default: "New Blog"},
         content: String,
-        lastEidtDate: {type: Date, default: Date.now}
+        lastEidtDate: {type: Date, default: Date.now},
+        blogCollection: {type: String, default: ""}
+    }
+);
+
+var BlogCollectionSchema = new Schema(
+    {
+        title: {type: String, default: "默认"},
+        blogIds: []
     }
 );
 
 var BlogModel = mongoose.model("blogs", BlogsSchema);
+var BlogCollectionModel = mongoose.model("blogCollections", BlogCollectionSchema);
 
 dbtools.saveNewBlog = function (newBlog, callback)
 {
     var blog = new BlogModel();
     blog.title = newBlog.title;
     blog.content = newBlog.content;
+    blog.blogCollection = newBlog.blogCollection;
     
     blog.save(function (error)
     {
@@ -67,7 +77,7 @@ dbtools.saveNewBlog = function (newBlog, callback)
 
 dbtools.getAllBlogs = function (callback)
 {
-    BlogModel.find({}, "_id title lastEidtDate", function(error, result)
+    BlogModel.find({}, "_id title lastEidtDate blogCollection", function(error, result)
     {
         callback(error, result);
     });
@@ -85,7 +95,7 @@ dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
 {
     var query = BlogModel.
                 find({}).
-                select("_id title content lastEidtDate").
+                select("_id title content lastEidtDate blogCollection").
                 sort({lastEidtDate: -1}).
                 skip((pageNum - 1) * blogsPerPage).
                 limit(blogsPerPage);
@@ -99,7 +109,7 @@ dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
 dbtools.getBlogById = function (blogId, callback)
 {
     var query = BlogModel.findById(ObjectId(blogId));
-    query.select("_id title content lastEidtDate");
+    query.select("_id title content lastEidtDate blogCollection");
     query.exec(function (error, result)
     {
         callback(error, result);
@@ -123,6 +133,34 @@ dbtools.updateBlogById = function (blogId, updatedBlog, callback)
 dbtools.removeBlogById = function (blogId, callback)
 {
     var removeQuery = BlogModel.remove({"_id": ObjectId(blogId)});
+    removeQuery.exec(function (error)
+    {
+        callback(error);
+    });
+}
+
+dbtools.saveNewBlogCollection = function (collection, callback)
+{
+    var newCollection = new BlogCollectionModel();
+    newCollection.title = collection.title;
+    newCollection.save(function (error)
+    {
+        callback(error);
+    });
+}
+
+dbtools.getAllBlogCollections = function (callback)
+{
+    var query = BlogCollectionModel.find({}, "_id title");
+    query.exec(function (error, result)
+    {
+        callback(error, result);
+    });
+}
+
+dbtools.removeBlogCollectionById = function (collectionId, callback)
+{
+    var removeQuery = BlogCollectionModel.remove({"_id": ObjectId(collectionId)});
     removeQuery.exec(function (error)
     {
         callback(error);

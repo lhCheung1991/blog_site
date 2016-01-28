@@ -94,4 +94,66 @@ blogEditorMiddleware.pushNewBlog = function ()
     return __pushNewBlog;
 }
 
+/**********************blog collection manipulation******************/
+blogEditorMiddleware.saveNewBlogCollection = function()
+{
+    function __saveNewBlogCollection(req, res, next)
+    {
+        dbtools.saveNewBlogCollection(req.body, function (error)
+        {
+            if (error)
+            {
+                next();
+            }
+            else
+            {
+                res.status(200).end();
+            }
+        });
+    }
+    
+    return __saveNewBlogCollection;
+}
+
+blogEditorMiddleware.checkoutAllBlogCollections = function()
+{
+    function __checkoutAllBlogCollections(req, res, next)
+    {
+        dbtools.getAllBlogCollections(function (error, result)
+        {
+            if (error)
+            {
+                next();
+            }
+            else
+            {
+                res.setHeader("Content-Type", "application/json");
+                res.json(result);
+            }
+        });
+    }
+    
+    return __checkoutAllBlogCollections;
+}
+
+blogEditorMiddleware.removeCollectionById = function ()
+{
+    function __removeCollectionById(req, res, next)
+    {
+        dbtools.removeBlogCollectionById(req.body._id, function(error)
+        {
+            if (error)
+            {
+                next();
+            }
+            else
+            {
+                res.status(200).end();
+            }
+        });
+    }
+    
+    return __removeCollectionById;
+}
+/**********************blog collection manipulation******************/
 module.exports = blogEditorMiddleware;
