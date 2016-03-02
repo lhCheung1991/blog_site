@@ -12,6 +12,7 @@ block content
                     tr
                         th 文章编号
                         th 文章标题
+                        th 所属文集
                         th 文章最后修改日期
                         th 查看
                         th 编辑
@@ -20,7 +21,8 @@ block content
                         tr
                             td= blog._id
                             td= blog.title
-                            td= blog.lastEidtDate
+                            td= blog.blogCollection
+                            td= blog.lastEditDate
                             td
                                 button(type="button" class="btn btn-success") 查看
                             td

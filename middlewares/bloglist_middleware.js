@@ -1,6 +1,7 @@
 "use strict";
 
 var dbtools = require("../database/dbtools");
+var events = require("events");
 var bloglistMiddleware = {};
 var blogsPerPage = 8;
 
@@ -8,6 +9,7 @@ bloglistMiddleware.getBlogListPageNum = function ()
 {
     function __getBlogListPageNum(req, res, next)
     {
+
         dbtools.getAllBlogsCount(function(error, count)
         {
             if (error)
@@ -28,7 +30,38 @@ bloglistMiddleware.getBlogListPageNum = function ()
                     }
                     else
                     {
-                        res.render("bloglist", {pagesCnt: pages, blogs: result, curPageNum: pageNum});
+                        var blogsWithCollections = [];
+                        var finishCnt = 0;
+                        var eventEmitter = new events.EventEmitter();
+                        eventEmitter.on("render", function(error, result)
+                        {
+                            res.render("bloglist", {pagesCnt: pages, blogs: blogsWithCollections, curPageNum: pageNum});
+                        });
+                        
+                        if (result.length === 0)
+                        {
+                            eventEmitter.emit("render");
+                        } 
+                        else
+                        {
+                            for (let idx = 0; idx < result.length; idx++)
+                            {
+                                var curCollectionId = result[idx].blogCollectionId || 0;
+                                dbtools.getBlogCollectionById(curCollectionId, function(error, data)
+                                {
+                                    var curBlog = {};
+                                    curBlog._id = result[idx]._id;
+                                    curBlog.title = result[idx].title;
+                                    curBlog.content = result[idx].content;
+                                    curBlog.lastEditDate = result[idx].lastEditDate;
+                                    if (data) curBlog.blogCollection = data.title;
+                                    blogsWithCollections.push(curBlog);
+                                    finishCnt++;
+                                    if (finishCnt >= result.length) eventEmitter.emit("render");
+                                });
+                            }
+                        }    
+                        
                     }    
                 });
                 

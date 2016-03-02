@@ -83,6 +83,7 @@ $(function ()
             var newBlog = {};
             newBlog.title = $("#titleInput").val();
             newBlog.content = ue.getContent();
+            newBlog.blogCollectionId = $("#chooseCollectionSelect option:selected").val();
             
             $.ajax("/admin/blogeditor/newblog/pushnewblog", {
                  method: "post",
@@ -114,6 +115,7 @@ $(function ()
             var updatedBlogObj = {};
             updatedBlogObj.title = $("#titleInput").val();
             updatedBlogObj.content = ue.getContent();
+            updatedBlogObj.blogCollectionId = $("#chooseCollectionSelect option:selected").val();
             
             $.ajax("/admin/blogeditor/updateblog/pushupdatedblog", {
                 method: "post",

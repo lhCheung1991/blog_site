@@ -9,7 +9,7 @@ block content
         //- artical header begin
         div.blog-header
             h1.blog-title #{blog.title}
-            p.lead.blog-description 最后编辑时间: #{blog.lastEidtDate}
+            p.lead.blog-description 最后编辑时间: #{blog.lastEditDate}
         //- artical header end
         
         //- blog row begin
@@ -18,6 +18,15 @@ block content
                 div.blog-post
                     !{blog.content}
             div.col-sm-3.col-sm-offset-1.blog-sidebar
-                div.sidebar-module.sidebar-module-inset 文章导引
-                div.sidebar-module
-        //- blog row end            
+                div.sidebar-wrapper
+                    div.sidebar-module.sidebar-module-inset 
+                        h4 文章导引
+                        p 欢迎阅读本文. 如若发现错误之处, 请联系我以帮忙改正, 谢谢. 
+                        p email: lhcheung1991@gmail.com
+                    div.sidebar-module#sidebar-content
+                        h4 目录
+                        ol.list-unstyled
+                        
+        //- blog row end
+                    
+    script(type="text/javascript" src="javascripts/blog.js")

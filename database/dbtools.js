@@ -28,8 +28,8 @@ var BlogsSchema = new Schema(
     {
         title: {type: String, default: "New Blog"},
         content: String,
-        lastEidtDate: {type: Date, default: Date.now},
-        blogCollection: {type: String, default: ""}
+        lastEditDate: {type: Date, default: Date.now},
+        blogCollectionId: {type: String, default: ""}
     }
 );
 
@@ -48,7 +48,7 @@ dbtools.saveNewBlog = function (newBlog, callback)
     var blog = new BlogModel();
     blog.title = newBlog.title;
     blog.content = newBlog.content;
-    blog.blogCollection = newBlog.blogCollection;
+    blog.blogCollectionId = newBlog.blogCollectionId;
     
     blog.save(function (error)
     {
@@ -77,7 +77,7 @@ dbtools.saveNewBlog = function (newBlog, callback)
 
 dbtools.getAllBlogs = function (callback)
 {
-    BlogModel.find({}, "_id title lastEidtDate blogCollection", function(error, result)
+    BlogModel.find({}, "_id title lastEditDate blogCollectionId", function(error, result)
     {
         callback(error, result);
     });
@@ -95,8 +95,8 @@ dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
 {
     var query = BlogModel.
                 find({}).
-                select("_id title content lastEidtDate blogCollection").
-                sort({lastEidtDate: -1}).
+                select("_id title content lastEditDate blogCollectionId").
+                sort({lastEditDate: -1}).
                 skip((pageNum - 1) * blogsPerPage).
                 limit(blogsPerPage);
     
@@ -109,10 +109,19 @@ dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
 dbtools.getBlogById = function (blogId, callback)
 {
     var query = BlogModel.findById(ObjectId(blogId));
-    query.select("_id title content lastEidtDate blogCollection");
+    query.select("_id title content lastEditDate blogCollectionId");
     query.exec(function (error, result)
     {
         callback(error, result);
+    });
+}
+
+dbtools.getBlogsByBlogCollectionId = function (collectionId, callback)
+{
+    var query = BlogModel.find({blogCollectionId: ObjectId(collectionId)});
+    query.exec(function (error, blogs)
+    {
+        callback(error, blogs);
     });
 }
 
@@ -121,7 +130,8 @@ dbtools.updateBlogById = function (blogId, updatedBlog, callback)
     var blog = {};
     blog.title = updatedBlog.title;
     blog.content = updatedBlog.content;
-    blog.lastEidtDate = Date.now();
+    blog.blogCollectionId = updatedBlog.blogCollectionId;
+    blog.lastEditDate = Date.now();
     
     var queryAndUpdate = BlogModel.findOneAndUpdate({"_id": ObjectId(blogId)}, blog);
     queryAndUpdate.exec(function (error, result)
@@ -136,6 +146,15 @@ dbtools.removeBlogById = function (blogId, callback)
     removeQuery.exec(function (error)
     {
         callback(error);
+    });
+}
+
+dbtools.getBlogCollectionById = function (collectionId, callback)
+{
+    var query = BlogCollectionModel.findById(ObjectId(collectionId));
+    query.exec(function(error, result)
+    {
+        callback(error, result);
     });
 }
 
@@ -161,8 +180,9 @@ dbtools.getAllBlogCollections = function (callback)
 dbtools.removeBlogCollectionById = function (collectionId, callback)
 {
     var removeQuery = BlogCollectionModel.remove({"_id": ObjectId(collectionId)});
-    removeQuery.exec(function (error)
+    removeQuery.exec(function (error, data)
     {
+        console.log(data.result);
         callback(error);
     });
 }

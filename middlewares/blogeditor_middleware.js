@@ -138,8 +138,23 @@ blogEditorMiddleware.checkoutAllBlogCollections = function()
 
 blogEditorMiddleware.removeCollectionById = function ()
 {
+    /**
+     * reset the blogCollectionId of the blogs, then remove collection by id
+     */
     function __removeCollectionById(req, res, next)
     {
+        dbtools.getBlogsByBlogCollectionId(req.body._id, function(error, blogs)
+        {
+            for (let idx = 0; idx < blogs.length; idx++)
+            {
+                blogs[idx].blogCollectionId = "";
+                dbtools.updateBlogById(blogs[idx]._id, blogs[idx], function(error, result)
+                {
+                    if (error) next();
+                });
+            }
+        });
+        
         dbtools.removeBlogCollectionById(req.body._id, function(error)
         {
             if (error)
