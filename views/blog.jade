@@ -9,7 +9,7 @@ block content
         //- artical header begin
         div.blog-header
             h1.blog-title #{blog.title}
-            p.lead.blog-description 最后编辑时间: #{blog.lastEditDate}
+            p.lead.blog-description(style="color: #49bf9d") 最后编辑时间: #{blog.lastEditDate}
         //- artical header end
         
         //- blog row begin
@@ -29,6 +29,11 @@ block content
                         ol.list-unstyled#category
                     div.sidebar-module#sidebar-content
                         h4 相关文章
-                        ol.list-unstyled#relative-article          
+                        ol.list-unstyled#relative-article
+                            each relBlog, idx in relativeBlogs
+                                li
+                                    a(href="/blogs/checkblog?blogId=#{relBlog._id}")= relBlog.title
+                        
+                                 
         //- blog row end       
     script(type="text/javascript" src="javascripts/blog.js")

@@ -5,6 +5,7 @@ var adminRouter = express.Router();
 var ueditorController = require("../middlewares/ueditor_controller");
 var bloglistMiddleware = require("../middlewares/bloglist_middleware");
 var blogEditorMiddleware = require("../middlewares/blogeditor_middleware");
+var adminLoginMiddleware = require("../middlewares/admin_login");
 
 adminRouter.get("/bloglist", bloglistMiddleware.getBlogListPageNum());    // /admin/bloglist?pageNum=x
 
@@ -26,5 +27,7 @@ adminRouter.get("/bloglist/removeblog", bloglistMiddleware.removeBlogById());
 adminRouter.post("/blogeditor/newcollection", blogEditorMiddleware.saveNewBlogCollection());
 adminRouter.get("/blogeditor/blogcollections/checkout", blogEditorMiddleware.checkoutAllBlogCollections());
 adminRouter.post("/blogeditor/blogcollections/removecollection", blogEditorMiddleware.removeCollectionById());
+
+adminRouter.get("/adminlogin", adminLoginMiddleware.getAdminLoginPage());
 
 module.exports = adminRouter;

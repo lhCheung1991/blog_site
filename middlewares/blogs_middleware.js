@@ -1,6 +1,7 @@
 "use strict";
 
 var dbtools = require("../database/dbtools");
+var events = require("events");
 
 var blogsMiddleware = {};
 
@@ -17,7 +18,25 @@ blogsMiddleware.checkBlog = function ()
             }
             else
             {
-                res.render("blog", {blog: result});    
+                // res.render("blog", {blog: result});
+                if (result.blogCollectionId === "")
+                {
+                    res.render("blog", {blog: result, relativeBlogs: {}});
+                }
+                else
+                {
+                    dbtools.getBlogsByBlogCollectionId(result.blogCollectionId, function(err, results)
+                    {
+                        if (error)
+                        {
+                            next();
+                        }
+                        else
+                        {
+                            res.render("blog", {blog: result, relativeBlogs: results});
+                        }
+                    });   
+                }   
             }
         });
     }

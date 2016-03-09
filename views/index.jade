@@ -15,11 +15,11 @@ block content
         h1 Github: 
             a(href="https://github.com/lhCheung1991") github.com/lhCheung1991
         br
-        h1 Friend links
+        h1 Friend Links
         h1 Joey Yue: 
             a(href="http://www.longmenwaideyu.com") www.longmenwaideyu.com
-        h1 Jasine: 
-            a(href="http://www.jasine.com") http://www.jasine.me
+        h1 Jasine Chan: 
+            a(href="http://blog.jasine.me") blog.jasine.me
             
         
     //- Main
@@ -68,6 +68,7 @@ block content
             section#one
                 header.major
                     h2= blog.title
+                    h4(style="color: #49bf9d")= blog.lastEditDate
                 div(style="height: 150px; overflow: hidden")
                     p !{blog.content}
                 ul.actions
@@ -130,7 +131,7 @@ block content
         // 	</ul>
         // </section>
 
-        // <!-- Three -->
+        //- Three
         // <section id="three">
         // 	<h2>Get In Touch</h2>
         // 	<p>Accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque lorem ipsum dolor.</p>
@@ -168,8 +169,6 @@ block content
         // 	</div>
         // </section>
 
-        // <!-- Four -->
-        // <!--
         // <section id="four">
         //     <h2>Elements</h2>
 
@@ -490,22 +489,20 @@ block content
     footer#footer
         ul.icons
             li
-                a(href="#" class="icon fa-twitter")
-                    span(class="label") Twitter
-            li
-                a(href="#" class="icon fa-github")
+                a(href="https://github.com/lhCheung1991" class="icon fa-github")
                     span(class="label") Github
             li
-                a(href="#" class="icon fa-dribbble")
+                a(href="https://www.facebook.com/profile.php?id=100010666630786" class="icon fa-facebook")
                     span(class="label") Dribbble
             li
                 a(href="#" class="icon fa-envelope-o")
                     span(class="label") Email
                     
         ul(class="copyright")
-            li &copy; Untitled
+            li &copy;
+                a(href="/admin/adminlogin") Linghan Cheung
             li Design: 
-                a(href="http://html5up.net") HTML5 UP
+                a(href="https://github.com/lhCheung1991/blog_site") https://github.com/lhCheung1991/blog_site
     //- Scripts
     script(src="html5up-strata/assets/js/jquery.min.js")
     script(src="html5up-strata/assets/js/jquery.poptrox.min.js")

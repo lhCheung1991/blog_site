@@ -29,8 +29,8 @@ html(lang="en")
             .container-fluid
                 p(class="navbar-text navbar-left") 
                     a(href="/" class="navbar-link") Linghan Cheung 's Site
-                p(class="navbar-text navbar-right") 
-                    a(class="navbar-link" id="loginAnchor" href="https://github.com/login/oauth/authorize?client_id=938e2f5f6ff236e5e4d5&state=31415926&state=31415926") Sign In with Github
+                // p(class="navbar-text navbar-right") 
+                //     a(class="navbar-link" id="loginAnchor" href="https://github.com/login/oauth/authorize?client_id=938e2f5f6ff236e5e4d5&state=31415926&state=31415926") Sign In with Github
         //- navigator bar end
 
         // jQuery (necessary for Bootstrap's JavaScript plugins)
@@ -44,6 +44,9 @@ html(lang="en")
         div
             hr
             foot.footer
-                p &copy; Linghan Cheung Powered by Node.js
+                p &copy; 
+                    a(href="/") Linghan Cheung 
+                    span Powered by 
+                    a(href="https://nodejs.org/en/") Node.js
                 p 京IPC备号
         
