@@ -1,0 +1,79 @@
+extends layout
+
+block individual_css
+    link(href="stylesheets/tagcloud.css" rel="stylesheet")
+    // link(href="stylesheets/github.css" rel="stylesheet")
+
+block content
+    div.container
+        div.row
+            //- blog page begin
+            div.col-sm-8
+                each blog, idx in blogs
+                    div.panel.panel-primary
+                        div.panel-heading
+                            div.row
+                                div.col-sm-6
+                                    h3.panel-title= blog.title
+                                div.col-sm-3
+                                    span 文集
+                                div.col-sm-2
+                                    span 标签
+                                div.col-sm-1
+                                    a(href="/blogs/checkblog?blogId=#{blog._id}") More>
+                        div.panel-body
+                            div(style="height: 150px; overflow: hidden")
+                                !{blog.content}
+                nav
+                    ul(class="pagination")
+                        li
+                            a(href="#" aria-label="Previous")
+                                span(aria-hidden="true") &laquo;
+                        - var pagesIdx = 1
+                        while pagesIdx <= pagesCnt
+                            if curPageNum == pagesIdx
+                                li.active
+                                    a(href="/index?pageNum=#{pagesIdx}")= pagesIdx++
+                            else
+                                li
+                                    a(href="/index?pageNum=#{pagesIdx}")= pagesIdx++
+                        li
+                            a(href="#" aria-label="Next")
+                                span(aria-hidden="true") &raquo;
+            //- blog page end
+            //- sidebar begin
+            div.col-sm-4
+                div.panel.panel-success
+                    div.panel-heading
+                        h3.panel-title 博主信息
+                    div.panel-body
+                        p 姓名: Linghan Cheung 
+                        p 地点: 北京 
+                        p 职业: 学生 
+                        p 文章: #
+                        p Email: lhcheung1991@gmail.com
+                        p 
+                            span Github: 
+                            a(href="https://github.com/lhCheung1991") github.com/lhCheung1991
+                div.panel.panel-warning
+                    div.panel-heading
+                        h3.panel-title Tag Cloud
+                    div.panel-body
+                        //- tag cloud
+                        div#tagCloud
+                            ul#tagList
+                                li 
+                                    a(href="#") JavaScript
+                                li
+                                    a(href="#") C++
+                div.panel.panel-info
+                    div.panel-heading
+                        h3.panel-title 友情链接
+                    div.panel-body
+                        p
+                            span 龙门外的鱼: &nbsp 
+                            a(href="http://www.longmenwaideyu.com/") www.longmenwaideyu.com
+                        p 
+                            span Jasine Chan: &nbsp
+                            a(href="http://www.jasine.me") www.jasine.me
+            //- sidebar end

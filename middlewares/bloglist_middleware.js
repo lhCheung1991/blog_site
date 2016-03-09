@@ -33,6 +33,7 @@ bloglistMiddleware.getBlogListPageNum = function ()
                         var blogsWithCollections = [];
                         var finishCnt = 0;
                         var eventEmitter = new events.EventEmitter();
+                        // define a event emitter, then you can emit an event
                         eventEmitter.on("render", function(error, result)
                         {
                             res.render("bloglist", {pagesCnt: pages, blogs: blogsWithCollections, curPageNum: pageNum});

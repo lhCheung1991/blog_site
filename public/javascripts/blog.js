@@ -2,7 +2,7 @@
 
 $(function()
 {
-    var $categoryol = $("ol.list-unstyled");
+    var $categoryol = $("#category");
     var $header2 = $("h2");
     
     for (let idx = 0; idx < $header2.length; idx++)
