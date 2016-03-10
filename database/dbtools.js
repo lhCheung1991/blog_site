@@ -91,6 +91,14 @@ dbtools.getAllBlogsCount = function (callback)
     });
 }
 
+dbtools.getBlogsCountByCollectionId = function (collectionId, callback)
+{
+    BlogModel.count({"blogCollectionId": ObjectId(collectionId)}, function(error, count)
+    {
+        callback(error, count);
+    });
+}
+
 dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
 {
     var query = BlogModel.
@@ -100,6 +108,20 @@ dbtools.getBlogsPageNum = function (pageNum, blogsPerPage, callback)
                 skip((pageNum - 1) * blogsPerPage).
                 limit(blogsPerPage);
     
+    query.exec(function(error, result)
+    {
+        callback(error, result);
+    });
+}
+
+dbtools.getBlogsPageNumByCollectionId = function (collectionId, pageNum, blogsPerPage, callback)
+{
+    var query = BlogModel.
+                find({"blogCollectionId": ObjectId(collectionId)}).
+                select("_id title content lastEditDate blogCollectionId").
+                sort({lastEditDate: -1}).
+                skip((pageNum - 1) * blogsPerPage).
+                limit(blogsPerPage);
     query.exec(function(error, result)
     {
         callback(error, result);

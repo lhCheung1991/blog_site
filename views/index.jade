@@ -84,10 +84,10 @@ block content
                 while pagesIdx <= pagesCnt
                     if curPageNum == pagesIdx
                         li.active
-                            a(href="/index?pageNum=#{pagesIdx}&blogCollectionId=")= pagesIdx++
+                            a(href="/index?pageNum=#{pagesIdx}&blogCollectionId=#{collectionId}")= pagesIdx++
                     else
                         li
-                            a(href="/index?pageNum=#{pagesIdx}&blogCollectionId=")= pagesIdx++
+                            a(href="/index?pageNum=#{pagesIdx}&blogCollectionId=#{collectionId}")= pagesIdx++
                 li
                     a(href="#" aria-label="Next")
                         span(aria-hidden="true") &raquo;
