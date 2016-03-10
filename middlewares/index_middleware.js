@@ -33,6 +33,9 @@ indexMiddleware.getBlogListPageNum = function ()
                 });
             }
         });
+        
+        // console.log(req.query.blogCollectionId);
+        
     }
     
     return __getBlogListPageNum;

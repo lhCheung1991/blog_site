@@ -25,12 +25,67 @@ html(lang="en")
         
         
         //- navigator bar begin
-        nav(class="navbar navbar-inverse navbar-fixed-top")
-            .container-fluid
-                p(class="navbar-text navbar-left") 
-                    a(href="/" class="navbar-link") Linghan Cheung 's Site
+        // nav(class="navbar navbar-inverse navbar-fixed-top")
+        //     .container-fluid
+        //         p(class="navbar-text navbar-left") 
+        //             a(href="/" class="navbar-link") Linghan Cheung 's Site
                 // p(class="navbar-text navbar-right") 
                 //     a(class="navbar-link" id="loginAnchor" href="https://github.com/login/oauth/authorize?client_id=938e2f5f6ff236e5e4d5&state=31415926&state=31415926") Sign In with Github
+                // p(class="navbar-text navbar-right")
+                //     span.glyphicon.glyphicon-search(data-toggle="tooltip" data-placement="top" title="搜索本站")
+        nav(class="navbar navbar-inverse navbar-fixed-top")
+            .container-fluid
+                div(class="navbar-header")
+                    button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+                        span(class="sr-only") Toggle navigation
+                        span(class="icon-bar")
+                        span(class="icon-bar")
+                        span(class="icon-bar")
+                a(class="navbar-brand" href="/") Linghan Cheung's Site
+
+                div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+                    ul(class="nav navbar-nav")
+                        // li(class="active")
+                        //     a(href="#") Link 
+                        //         span(class="sr-only") (current)
+                        // li
+                        //     a(href="#") Link
+                        li(class="dropdown")
+                            a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Article Collections 
+                                span(class="caret")
+                            ul.dropdown-menu#blog-colleciton-list
+                                // li
+                                //     a(href="#") Action
+                                // li
+                                //     a(href="#") Another action
+                                // li
+                                //     a(href="#") Something else here
+                                // // li(role="separator" class="divider")
+                                // li
+                                //     a(href="#") Separated link
+                                // // li(role="separator" class="divider")
+                                // li
+                                //     a(href="#") One more separated link
+                    form(class="navbar-form navbar-right" role="search")
+                        div(class="form-group")
+                            input(type="text" class="form-control" placeholder="Search")
+                        button(type="submit" class="btn btn-default") Submit
+                    // ul(class="nav navbar-nav navbar-right")
+                    //     li
+                    //         a(href="#") Link
+                    //     li(class="dropdown")
+                    //         a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Dropdown 
+                    //             span(class="caret")
+                    //         ul(class="dropdown-menu")
+                    //             li
+                    //                 a(href="#") Action
+                    //             li
+                    //                 a(href="#") Another action
+                    //             li
+                    //                 a(href="#") Something else here
+                    //             li(role="separator" class="divider")
+                    //             li
+                    //                 a(href="#") Separated link
         //- navigator bar end
 
         // jQuery (necessary for Bootstrap's JavaScript plugins)
@@ -38,6 +93,7 @@ html(lang="en")
         // Include all compiled plugins (below), or include individual files as needed
         script(src="javascripts/bootstrap.min.js")
         script(src="javascripts/login.js")
+        script(src="javascripts/navbar.js")
         
         block content
         

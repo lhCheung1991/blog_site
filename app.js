@@ -11,6 +11,7 @@ var indexRouter = require("./routes/index_router");
 var loginRouter = require("./routes/login_router");
 var adminRouter = require("./routes/admin_router");
 var blogsRouter = require("./routes/blogs_router");
+var navbarRouter = require("./routes/navbar_router");
 var app = express();    // instantiates Express
 /**
  * Before Express can render template files, the following application settings must be set:
@@ -64,6 +65,7 @@ app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/admin", adminRouter);    // the administer entry
 app.use("/blogs", blogsRouter);    // the blogs entry
+app.use("/navbar", navbarRouter);
 /************route section******************/
 
 /**
