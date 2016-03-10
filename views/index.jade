@@ -68,7 +68,7 @@ block content
             section#one
                 header.major
                     h2= blog.title
-                    h4= blog.blogCollection
+                    h4(style="color: #F0E916")= blog.blogCollection
                     h5(style="color: #49bf9d")= blog.lastEditDate
                 div(style="height: 150px; overflow: hidden")
                     p !{blog.content}
@@ -84,10 +84,10 @@ block content
                 while pagesIdx <= pagesCnt
                     if curPageNum == pagesIdx
                         li.active
-                            a(href="/index?pageNum=#{pagesIdx}")= pagesIdx++
+                            a(href="/index?pageNum=#{pagesIdx}&blogCollectionId=")= pagesIdx++
                     else
                         li
-                            a(href="/index?pageNum=#{pagesIdx}")= pagesIdx++
+                            a(href="/index?pageNum=#{pagesIdx}&blogCollectionId=")= pagesIdx++
                 li
                     a(href="#" aria-label="Next")
                         span(aria-hidden="true") &raquo;
@@ -494,7 +494,10 @@ block content
                     span(class="label") Github
             li
                 a(href="https://www.facebook.com/profile.php?id=100010666630786" class="icon fa-facebook")
-                    span(class="label") Dribbble
+                    span(class="label") Facebook
+            li
+                a(href="https://plus.google.com/u/0/100237372391745615536" class="icon fa-google")
+                    span(class="label") Google+
             li
                 a(href="#" class="icon fa-envelope-o")
                     span(class="label") Email
