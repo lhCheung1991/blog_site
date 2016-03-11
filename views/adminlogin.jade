@@ -7,17 +7,17 @@ block content
 
     div.container
 
-        form.form-signin
-            h2.form-signin-heading Please sign in
+        form.form-signin(method="post")
+            h2.form-signin-heading Linghan Cheung
             label(for="inputEmail" class="sr-only") Email address
-            input(type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus)
+            input(type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="username")
             label(for="inputPassword" class="sr-only") Password
-            input(type="password" id="inputPassword" class="form-control" placeholder="Password" required)
+            input(type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password")
             div.checkbox
                 label
-                    input(type="checkbox" value="remember-me") 
-                    span Remember me
-            button.btn.btn-lg.btn-primary.btn-block(type="submit") Sign in
+                    input(type="checkbox" value="remember-me" name="cookie_expire_check")
+                    span Remember me for 3 days
+            button.btn.btn-lg.btn-primary.btn-block#sign-in Sign in
 
     script(src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js")
     script(src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js")

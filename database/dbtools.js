@@ -40,8 +40,16 @@ var BlogCollectionSchema = new Schema(
     }
 );
 
+var AdminUserSchema = new Schema(
+    {
+        username: {type: String},
+        password: {type: String}
+    }
+);
+
 var BlogModel = mongoose.model("blogs", BlogsSchema);
 var BlogCollectionModel = mongoose.model("blogCollections", BlogCollectionSchema);
+var AdminUserModel = mongoose.model("adminUsers", AdminUserSchema);
 
 dbtools.saveNewBlog = function (newBlog, callback)
 {
@@ -206,6 +214,18 @@ dbtools.removeBlogCollectionById = function (collectionId, callback)
     {
         console.log(data.result);
         callback(error);
+    });
+}
+
+dbtools.getPasswordByUsername = function (username, callback)
+{
+    var query = AdminUserModel.
+                find({"username": username}).
+                select("password");
+                
+    query.exec(function (error, result)
+    {
+        callback(error, result);
     });
 }
 
