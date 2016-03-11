@@ -22,7 +22,7 @@ $(function ()
     {
         $("#chooseCollectionSelect").empty();
         $("#deleteCollectionSelect").empty();
-        for (let idx = 0; idx < collections.length; idx++)
+        for (var idx = 0; idx < collections.length; idx++)
         {
             $("#chooseCollectionSelect").append('<option value="' + collections[idx]._id + '">' + collections[idx].title + "</option>");
             $("#deleteCollectionSelect").append('<option value="' + collections[idx]._id + '">' + collections[idx].title + "</option>");
