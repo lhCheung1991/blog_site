@@ -17,6 +17,13 @@ block content
             div.col-sm-8.blog-main
                 div.blog-post
                     !{blog.content}
+                    
+                hr
+                h2 Comments
+                //- 加载编辑器的容器
+                form(action="" method="post")
+                    script#container(name="content" type="text/plain")
+                    
             div.col-sm-3.col-sm-offset-1.blog-sidebar
                 div.sidebar-wrapper
                     div.sidebar-module.sidebar-module-inset 
@@ -35,5 +42,10 @@ block content
                                     a(href="/blogs/checkblog?blogId=#{relBlog._id}")= relBlog.title
                         
                                  
-        //- blog row end       
+        //- blog row end  
+    //- 配置文件
+    script(type="text/javascript" src="ueditor/ueditor.config.js")
+    //- 编辑器源码文件
+    script(type="text/javascript" src="ueditor/ueditor.all.js")
+    //- 实例化编辑器  
     script(type="text/javascript" src="javascripts/blog.js")
