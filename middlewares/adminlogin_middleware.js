@@ -67,6 +67,7 @@ adminLoginMiddleware.authAdminUser = function ()
                         }
                         else
                         {
+                            console.log("Login succeed and don't remember");
                             res.cookie("uid", "lhcheung1991");   
                         }
                         

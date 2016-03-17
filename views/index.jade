@@ -76,7 +76,7 @@ block content
         nav
             ul(class="pagination")
                 li
-                    a(href="#" aria-label="Previous")
+                    a(href="/index?pageNum=#{curPageNum - 1}&blogCollectionId=#{collectionId}" aria-label="Previous")
                         span(aria-hidden="true") &laquo;
                 - var pagesIdx = 1
                 while pagesIdx <= pagesCnt
@@ -87,7 +87,7 @@ block content
                         li
                             a(href="/index?pageNum=#{pagesIdx}&blogCollectionId=#{collectionId}")= pagesIdx++
                 li
-                    a(href="#" aria-label="Next")
+                    a(href="/index?pageNum=#{curPageNum + 1}&blogCollectionId=#{collectionId}" aria-label="Next")
                         span(aria-hidden="true") &raquo;
         //- blog page end       
         //- Two
