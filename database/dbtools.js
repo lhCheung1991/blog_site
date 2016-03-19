@@ -143,6 +143,14 @@ dbtools.getAllBlogsCount = function (callback)
     });
 }
 
+dbtools.getCommentsCountByBlogId = function (blogId, callback)
+{
+    BlogCommentModel.count({"blogId": ObjectId(blogId)}, function (error, count)
+    {
+        callback(error, count);        
+    });
+}
+
 dbtools.getBlogsCountByCollectionId = function (collectionId, callback)
 {
     BlogModel.count({"blogCollectionId": ObjectId(collectionId)}, function(error, count)

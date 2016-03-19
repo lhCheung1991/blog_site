@@ -59,9 +59,22 @@ indexMiddleware.getBlogListPageNum = function ()
                                         curBlog.content = result[idx].content;
                                         curBlog.lastEditDate = result[idx].lastEditDate;
                                         if (data) curBlog.blogCollection = data.title;
-                                        blogsWithCollections.push(curBlog);
-                                        finishCnt++;
-                                        if (finishCnt >= result.length) eventEmitter.emit("render");
+                                        
+                                        dbtools.getCommentsCountByBlogId(result[idx]._id, function (error, commentCount)
+                                        {
+                                            if (error)
+                                            {
+                                                next();
+                                            }
+                                            else
+                                            {
+                                                curBlog.commentCount = commentCount;
+                                                blogsWithCollections.push(curBlog);
+                                                finishCnt++;
+                                                if (finishCnt >= result.length) eventEmitter.emit("render");
+                                            }
+                                        });
+                                        
                                     });
                                 }
                             }
@@ -119,9 +132,22 @@ indexMiddleware.getBlogListPageNum = function ()
                                         curBlog.content = result[idx].content;
                                         curBlog.lastEditDate = result[idx].lastEditDate;
                                         if (data) curBlog.blogCollection = data.title;
-                                        blogsWithCollections.push(curBlog);
-                                        finishCnt++;
-                                        if (finishCnt >= result.length) eventEmitter.emit("render");
+                                        
+                                        dbtools.getCommentsCountByBlogId(result[idx]._id, function (error, commentCount)
+                                        {
+                                            if (error)
+                                            {
+                                                next();
+                                            }
+                                            else
+                                            {
+                                                curBlog.commentCount = commentCount;
+                                                blogsWithCollections.push(curBlog);
+                                                finishCnt++;
+                                                if (finishCnt >= result.length) eventEmitter.emit("render");
+                                            }
+                                        });
+                                        
                                     });
                                 }
                             }
