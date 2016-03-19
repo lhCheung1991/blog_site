@@ -85,7 +85,17 @@ bloglistMiddleware.removeBlogById = function ()
             }
             else
             {
-                res.redirect("/admin/bloglist");
+                dbtools.removeCommentsByBlogId(req.query.blogId, function (error)
+                {
+                    if (error)
+                    {
+                        next();
+                    }
+                    else
+                    {
+                        res.redirect("/admin/bloglist");
+                    }
+                });
             }
         });
     }

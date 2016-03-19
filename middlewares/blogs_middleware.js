@@ -18,30 +18,59 @@ blogsMiddleware.checkBlog = function ()
             }
             else
             {
-                // res.render("blog", {blog: result});
-                if (result.blogCollectionId === "")
+                dbtools.getAllCommentsByBlogId(blogId, function (error, comments)
                 {
-                    res.render("blog", {blog: result, relativeBlogs: {}});
-                }
-                else
-                {
-                    dbtools.getBlogsByBlogCollectionId(result.blogCollectionId, function(err, results)
+                    if (error)
                     {
-                        if (error)
+                        next();
+                    }
+                    else
+                    {
+                        if (result.blogCollectionId === "")
                         {
-                            next();
+                            res.render("blog", {blog: result, comments: comments, relativeBlogs: {}});
                         }
                         else
                         {
-                            res.render("blog", {blog: result, relativeBlogs: results});
+                            dbtools.getBlogsByBlogCollectionId(result.blogCollectionId, function(err, results)
+                            {
+                                if (error)
+                                {
+                                    next();
+                                }
+                                else
+                                {
+                                    res.render("blog", {blog: result, comments: comments, relativeBlogs: results});
+                                }
+                            });   
                         }
-                    });   
-                }   
+                    }
+                });   
             }
         });
     }
     
     return __checkBlogById;
+}
+
+blogsMiddleware.commitComment = function ()
+{
+    function __commitComment(req, res, next)
+    {
+        dbtools.saveNewComment(req.body, function (error)
+        {
+            if (error)
+            {
+                next();
+            }
+            else
+            {
+                res.redirect('/blogs/checkblog?blogId=' + req.body.blogId + '#defaultCommentEditor');
+            }
+        });
+    }
+    
+    return __commitComment;
 }
 
 module.exports = blogsMiddleware;

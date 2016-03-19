@@ -47,9 +47,24 @@ var AdminUserSchema = new Schema(
     }
 );
 
+var BlogCommentSchema = new Schema(
+    {
+        blogId: {type: String},
+        replyToId: {type: String},
+        replyToName: {type: String},
+        nickName: {type: String},
+        email: {type: String},
+        url: {type: String},
+        commentContent: {type: String},
+        commentDate: {type: Date, default: Date.now}
+    }
+);
+
+
 var BlogModel = mongoose.model("blogs", BlogsSchema);
 var BlogCollectionModel = mongoose.model("blogCollections", BlogCollectionSchema);
 var AdminUserModel = mongoose.model("adminUsers", AdminUserSchema);
+var BlogCommentModel = mongoose.model("blogComments", BlogCommentSchema);
 
 dbtools.saveNewBlog = function (newBlog, callback)
 {
@@ -72,6 +87,23 @@ dbtools.saveNewBlog = function (newBlog, callback)
     });
 };
 
+dbtools.saveNewComment = function (newComment, callback)
+{
+    var comment = new BlogCommentModel();
+    comment.blogId = newComment.blogId;
+    comment.replyToId = newComment.replyToId;
+    comment.replyToName = newComment.replyToName;
+    comment.nickName = newComment.nickName;
+    comment.email = newComment.email;
+    comment.url = newComment.url;
+    comment.commentContent = newComment.commentContent;
+    
+    comment.save(function (error)
+    {
+        callback(error);
+    });
+}
+
 /**
  * When executing a query with a callback function, you specify your query as a JSON document.
  * The JSON document's syntax is the same as the MongoDB shell.
@@ -82,6 +114,18 @@ dbtools.saveNewBlog = function (newBlog, callback)
  * What results is depends on the operation: For findOne() it is a potentially-null single document, 
  * find() a list of documents, count() the number of documents, update() the number of documents affected, etc
  */
+
+dbtools.getAllCommentsByBlogId = function (blogId, callback)
+{
+    var query = BlogCommentModel.
+                find({"blogId": ObjectId(blogId)}).
+                select("_id blogId replyToId replyToName nickName email url commentContent commentDate").
+                sort({commentDate: 1});
+    query.exec(function(error, result)
+    {
+        callback(error, result);
+    });
+}
 
 dbtools.getAllBlogs = function (callback)
 {
@@ -210,6 +254,16 @@ dbtools.getAllBlogCollections = function (callback)
 dbtools.removeBlogCollectionById = function (collectionId, callback)
 {
     var removeQuery = BlogCollectionModel.remove({"_id": ObjectId(collectionId)});
+    removeQuery.exec(function (error, data)
+    {
+        console.log(data.result);
+        callback(error);
+    });
+}
+
+dbtools.removeCommentsByBlogId = function (blogId, callback)
+{
+    var removeQuery = BlogCommentModel.remove({"blogId": ObjectId(blogId)});
     removeQuery.exec(function (error, data)
     {
         console.log(data.result);

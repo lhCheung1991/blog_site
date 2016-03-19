@@ -17,56 +17,47 @@ block content
             div.col-sm-8.blog-main
                 div.blog-post
                     !{blog.content}
-                    
                 hr
-                h2 Comments
+                h2 History Comments
+                hr
                 //- comment block begin
-                div(class="media")
-                    div(class="media-left media-top")
-                        span.glyphicon.glyphicon-comment
-                    div(class="media-body")
-                        h4(class="media-heading") Middle aligned media
-                        p ahahahahahahahahahahahahahahahahahahahahahahahahahahahah
-                        p ahahahahahahahahahahahahahahahahahahahahahahahahahahahah
-                        p ahahahahahahahahahahahahahahahahahahahahahahahahahahahah
-                    //- comment form will be inserted into here
-                    span.btn.btn-primary.btn-generate-editor(type="button") 回复
-                        input(type="hidden" value="333" name="blogId")
-                        input(type="hidden" value="444" name="replyToId")
-                        input(type="hidden" value="aaa" name="replyToName")
-                hr
+                each comment, idx in comments
+                    div.media
+                        div.media-left.media-top
+                            span.glyphicon.glyphicon-comment
+                        div.media-body
+                            h4.media-heading 
+                                a(href="#{comment.url}") #{comment.nickName} 
+                                span said to 
+                                a(href="#") #{comment.replyToName} 
+                            h5(style="color: #49bf9d") #{comment.commentDate}
+                            p !{comment.commentContent}
+                        span.btn.btn-primary.btn-generate-editor(type="button") 回复
+                            input(type="hidden" value="#{comment.blogId}" name="blogId")
+                            input(type="hidden" value="#{comment._id}" name="replyToId")
+                            input(type="hidden" value="#{comment.nickName}" name="replyToName")
+                    hr
                 //- comment block end
                 
-                //- comment block begin
-                // div(class="media")
-                //     div(class="media-left media-top")
-                //         span.glyphicon.glyphicon-comment
-                //     div(class="media-body")
-                //         h4(class="media-heading") Middle aligned media
-                //         p ahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahah
-                //         p ahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahah
-                //         p ahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahah
-                //     //- comment form will be inserted into here
-                //     span.btn.btn-primary.btn-generate-editor(type="button") 回复
-                //         input(type="hidden" value="555" name="blogId")
-                //         input(type="hidden" value="666" name="replyToId")
-                // hr
-                //- comment block end
-
                 //- default reply form begin
-                h2 Comment to this article
-                form.form-horizontal(action="/blogs/commentcommit/" method="post")
+                h2 Comment to this artical
+                    a(name="defaultCommentEditor")
+                form.form-horizontal(action="/blogs/commitcomment/" method="post")
                     input(type="hidden" value="#{blog._id}" name="blogId")
-                    input(type="hidden" value="0" name="replyToId")
-                    input(type="hidden" value="0" name="replyToName")
+                    input(type="hidden" value="000000000000" name="replyToId")
+                    input(type="hidden" value="Author" name="replyToName")
                     div.form-group
                         label(for="nickNameId" class="col-sm-2 control-label") Nickname
                         div.col-sm-10
-                            input(type="text" class="form-control" id="nickNameId" placeholder="Nickname for displaying" name="nickName")
+                            input(type="text" class="form-control" id="nickNameId" placeholder="Nickname for displaying" name="nickName" required)
                     div.form-group
                         label(for="emailId" class="col-sm-2 control-label") E-mail
                         div.col-sm-10
-                            input(type="text" class="form-control" id="emailId" placeholder="E-mailing for contacting" name="email")
+                            input(type="text" class="form-control" id="emailId" placeholder="E-mailing for contacting" name="email" required)
+                    div.form-group
+                        label(for="urlId" class="col-sm-2 control-label") URL
+                        div.col-sm-10
+                            input(type="text" class="form-control" id="urlId" placeholder="Your personal URL" name="url" value="http://")
                     div.form-group
                         //- name="commentContent"
                         script#container-default(name="commentContent" type="text/plain")
@@ -88,9 +79,7 @@ block content
                         ol.list-unstyled#relative-article
                             each relBlog, idx in relativeBlogs
                                 li
-                                    a(href="/blogs/checkblog?blogId=#{relBlog._id}")= relBlog.title
-                        
-                                 
+                                    a(href="/blogs/checkblog?blogId=#{relBlog._id}")= relBlog.title                  
         //- blog row end  
     //- 配置文件
     script(type="text/javascript" src="ueditor/ueditor.config.js")

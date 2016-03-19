@@ -16,4 +16,6 @@ blogsRouter.all("/commenteditor/controller", ueditorController(
     })
 );
 
+blogsRouter.post(/commitcomment/, blogsMiddleware.commitComment());
+
 module.exports = blogsRouter;

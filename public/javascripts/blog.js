@@ -76,16 +76,19 @@ $(function()
 
 function generateCommentForm(blogId, replyToId, replyToName)
 {
-    var $commentForm = $('<form class="form-horizontal" action="/blogs/commentcommit/" method="post"></form>');
+    var $commentForm = $('<form class="form-horizontal" action="/blogs/commitcomment/" method="post"></form>');
     $commentForm.append('<input type="hidden" value="' + blogId + '" name="blogId"/>');
     $commentForm.append('<input type="hidden" value="' + replyToId + '" name="replyToId"/>');
     $commentForm.append('<input type="hidden" value="' + replyToName + '" name="replyToName"/>');
     
     $commentForm.append(
-        '<div class="form-group"><label for="nickNameId" class="col-sm-2 control-label">Nickname</label><div class="col-sm-10"><input type="text" class="form-control" id="nickNameId" placeholder="Nickname for displaying" name="nickName"/></div></div>'
+        '<div class="form-group"><label for="nickNameId" class="col-sm-2 control-label">Nickname</label><div class="col-sm-10"><input type="text" class="form-control" id="nickNameId" placeholder="Nickname for displaying" name="nickName" required/></div></div>'
         );
     $commentForm.append(
-        '<div class="form-group"><label for="emailId" class="col-sm-2 control-label">E-mail</label><div class="col-sm-10"><input type="text" class="form-control" id="emailId" placeholder="E-mail for contacting" name="email"/></div></div>'
+        '<div class="form-group"><label for="emailId" class="col-sm-2 control-label">E-mail</label><div class="col-sm-10"><input type="text" class="form-control" id="emailId" placeholder="E-mail for contacting" name="email" required/></div></div>'
+        );
+    $commentForm.append(
+        '<div class="form-group"><label for="urlId" class="col-sm-2 control-label">URL</label><div class="col-sm-10"><input type="text" class="form-control" id="urlId" placeholder="Your personal URL" name="url" value="http://"/></div></div>'
         );
 
     $commentForm.append('<div class="form-group"><script id="container-' + replyToId + '" name="commentContent" type="text/plain"></script></div>');
@@ -93,4 +96,9 @@ function generateCommentForm(blogId, replyToId, replyToName)
     $commentForm.append('<button class="btn btn-success" type="submit">提交</button>');
 
     return $commentForm;
+}
+
+function checkCommentForm()
+{
+    
 }
