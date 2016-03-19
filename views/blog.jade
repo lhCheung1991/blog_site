@@ -20,9 +20,58 @@ block content
                     
                 hr
                 h2 Comments
-                //- 加载编辑器的容器
-                form(action="" method="post")
-                    script#container(name="content" type="text/plain")
+                //- comment block begin
+                div(class="media")
+                    div(class="media-left media-top")
+                        span.glyphicon.glyphicon-comment
+                    div(class="media-body")
+                        h4(class="media-heading") Middle aligned media
+                        p ahahahahahahahahahahahahahahahahahahahahahahahahahahahah
+                        p ahahahahahahahahahahahahahahahahahahahahahahahahahahahah
+                        p ahahahahahahahahahahahahahahahahahahahahahahahahahahahah
+                    //- comment form will be inserted into here
+                    span.btn.btn-primary.btn-generate-editor(type="button") 回复
+                        input(type="hidden" value="333" name="blogId")
+                        input(type="hidden" value="444" name="replyToId")
+                        input(type="hidden" value="aaa" name="replyToName")
+                hr
+                //- comment block end
+                
+                //- comment block begin
+                // div(class="media")
+                //     div(class="media-left media-top")
+                //         span.glyphicon.glyphicon-comment
+                //     div(class="media-body")
+                //         h4(class="media-heading") Middle aligned media
+                //         p ahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahah
+                //         p ahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahah
+                //         p ahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahahah
+                //     //- comment form will be inserted into here
+                //     span.btn.btn-primary.btn-generate-editor(type="button") 回复
+                //         input(type="hidden" value="555" name="blogId")
+                //         input(type="hidden" value="666" name="replyToId")
+                // hr
+                //- comment block end
+
+                //- default reply form begin
+                h2 Comment to this article
+                form.form-horizontal(action="/blogs/commentcommit/" method="post")
+                    input(type="hidden" value="#{blog._id}" name="blogId")
+                    input(type="hidden" value="0" name="replyToId")
+                    input(type="hidden" value="0" name="replyToName")
+                    div.form-group
+                        label(for="nickNameId" class="col-sm-2 control-label") Nickname
+                        div.col-sm-10
+                            input(type="text" class="form-control" id="nickNameId" placeholder="Nickname for displaying" name="nickName")
+                    div.form-group
+                        label(for="emailId" class="col-sm-2 control-label") E-mail
+                        div.col-sm-10
+                            input(type="text" class="form-control" id="emailId" placeholder="E-mailing for contacting" name="email")
+                    div.form-group
+                        //- name="commentContent"
+                        script#container-default(name="commentContent" type="text/plain")
+                    button.btn.btn-success(type="submit" style="") 提交
+                //- default reply form end
                     
             div.col-sm-3.col-sm-offset-1.blog-sidebar
                 div.sidebar-wrapper
