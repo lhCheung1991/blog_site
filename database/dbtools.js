@@ -198,6 +198,17 @@ dbtools.getBlogById = function (blogId, callback)
     });
 }
 
+dbtools.getCommentById = function (commentId, callback)
+{
+    var query = BlogCommentModel.
+                find({"_id": ObjectId(commentId)}).
+                select("_id blogId replyToId replyToName nickName email url commentContent commentDate");
+    query.exec(function(error, result)
+    {
+        callback(error, result);
+    });
+}
+
 dbtools.getBlogsByBlogCollectionId = function (collectionId, callback)
 {
     var query = BlogModel.find({blogCollectionId: ObjectId(collectionId)});

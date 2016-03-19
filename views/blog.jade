@@ -28,7 +28,7 @@ block content
                         div.media-body
                             h4.media-heading 
                                 a(href="#{comment.url}") #{comment.nickName} 
-                                span said to 
+                                span reply to 
                                 a(href="#") #{comment.replyToName} 
                             h5(style="color: #49bf9d") #{comment.commentDate}
                             p !{comment.commentContent}
@@ -53,7 +53,7 @@ block content
                     div.form-group
                         label(for="emailId" class="col-sm-2 control-label") E-mail
                         div.col-sm-10
-                            input(type="text" class="form-control" id="emailId" placeholder="E-mailing for contacting" name="email" required)
+                            input(type="text" class="form-control" id="emailId" placeholder="E-mail for notifying automatically" name="email" required)
                     div.form-group
                         label(for="urlId" class="col-sm-2 control-label") URL
                         div.col-sm-10

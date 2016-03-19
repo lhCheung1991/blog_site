@@ -85,7 +85,7 @@ function generateCommentForm(blogId, replyToId, replyToName)
         '<div class="form-group"><label for="nickNameId" class="col-sm-2 control-label">Nickname</label><div class="col-sm-10"><input type="text" class="form-control" id="nickNameId" placeholder="Nickname for displaying" name="nickName" required/></div></div>'
         );
     $commentForm.append(
-        '<div class="form-group"><label for="emailId" class="col-sm-2 control-label">E-mail</label><div class="col-sm-10"><input type="text" class="form-control" id="emailId" placeholder="E-mail for contacting" name="email" required/></div></div>'
+        '<div class="form-group"><label for="emailId" class="col-sm-2 control-label">E-mail</label><div class="col-sm-10"><input type="text" class="form-control" id="emailId" placeholder="E-mail for notifying automatically" name="email" required/></div></div>'
         );
     $commentForm.append(
         '<div class="form-group"><label for="urlId" class="col-sm-2 control-label">URL</label><div class="col-sm-10"><input type="text" class="form-control" id="urlId" placeholder="Your personal URL" name="url" value="http://"/></div></div>'
