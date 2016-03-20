@@ -45,7 +45,7 @@ blogsMiddleware.checkBlog = function ()
                         var handledCommentsCnt = 0;
                         for (let idx = 0; idx < comments.length; idx++)
                         {
-                            if (comments[idx].replyToId !== "000000000000")
+                            if (comments[idx].replyToId !== "000000000000")    // not host
                             {
                                 dbtools.getCommentById(comments[idx].replyToId, function (error, oriCom)
                                 {
@@ -55,6 +55,16 @@ blogsMiddleware.checkBlog = function ()
                                     }
                                     else
                                     {
+                                        
+                                        if (oriCom.length === 0)    // original comment have been removed
+                                        {
+                                            oriCom[0] = {
+                                                nickName: "Ghost",
+                                                commentContent: "This comment has been deleted, sorry. :(",
+                                                commentDate: "Deleted permanently. :("
+                                            };
+                                        }
+                                        
                                         comments[idx].isHost = 0;
                                         comments[idx].originalComment = oriCom[0];
                                         handledCommentsCnt++;
@@ -82,7 +92,7 @@ blogsMiddleware.checkBlog = function ()
                                     }
                                 });
                             }
-                            else
+                            else    // host
                             {
                                 comments[idx].isHost = 1;
                                 comments[idx].originalComment = undefined;
