@@ -59,7 +59,7 @@ blogsMiddleware.checkBlog = function ()
                                         if (oriCom.length === 0)    // original comment have been removed
                                         {
                                             oriCom[0] = {
-                                                nickName: "Ghost",
+                                                nickName: comments[idx].replyToName,
                                                 commentContent: "This comment has been deleted, sorry. :(",
                                                 commentDate: "Deleted permanently. :("
                                             };
