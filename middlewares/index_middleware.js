@@ -10,7 +10,7 @@ indexMiddleware.getBlogListPageNum = function ()
     function __getBlogListPageNum(req, res, next)
     {   
         var collectionId = req.query.blogCollectionId;
-        if ( collectionId !== undefined && collectionId !== "default")
+        if ( collectionId !== undefined && collectionId !== "default")    // undefined
         {
             dbtools.getBlogsCountByCollectionId(collectionId, function (error, count)
             {
@@ -32,14 +32,13 @@ indexMiddleware.getBlogListPageNum = function ()
                         }
                         else
                         {
-                            var blogsWithCollections = [];
                             var finishCnt = 0;
                             
                             var eventEmitter = new events.EventEmitter();
                             // define a event emitter, then you can emit an event
-                            eventEmitter.on("render", function(error, result)
+                            eventEmitter.on("render", function(error)
                             {
-                                res.render("index", {pagesCnt: pages, blogs: blogsWithCollections, curPageNum: pageNum, collectionId: collectionId});
+                                res.render("index", {pagesCnt: pages, blogs: result, curPageNum: pageNum, collectionId: collectionId});
                             });
                             
                             if (result.length === 0)
@@ -53,12 +52,7 @@ indexMiddleware.getBlogListPageNum = function ()
                                     var curCollectionId = result[idx].blogCollectionId || 0;
                                     dbtools.getBlogCollectionById(curCollectionId, function(error, data)
                                     {
-                                        var curBlog = {};
-                                        curBlog._id = result[idx]._id;
-                                        curBlog.title = result[idx].title;
-                                        curBlog.content = result[idx].content;
-                                        curBlog.lastEditDate = result[idx].lastEditDate;
-                                        if (data) curBlog.blogCollection = data.title;
+                                        if (data) result[idx].blogCollection = data.title;
                                         
                                         dbtools.getCommentsCountByBlogId(result[idx]._id, function (error, commentCount)
                                         {
@@ -68,8 +62,7 @@ indexMiddleware.getBlogListPageNum = function ()
                                             }
                                             else
                                             {
-                                                curBlog.commentCount = commentCount;
-                                                blogsWithCollections.push(curBlog);
+                                                result[idx].commentCount = commentCount;
                                                 finishCnt++;
                                                 if (finishCnt >= result.length) eventEmitter.emit("render");
                                             }
@@ -83,7 +76,7 @@ indexMiddleware.getBlogListPageNum = function ()
                 }
             });
         }
-        else
+        else    // default 
         {
             dbtools.getAllBlogsCount(function(error, count)
             {
@@ -105,14 +98,13 @@ indexMiddleware.getBlogListPageNum = function ()
                         }
                         else
                         {
-                            var blogsWithCollections = [];
                             var finishCnt = 0;
                             
                             var eventEmitter = new events.EventEmitter();
                             // define a event emitter, then you can emit an event
-                            eventEmitter.on("render", function(error, result)
+                            eventEmitter.on("render", function(error)
                             {
-                                res.render("index", {pagesCnt: pages, blogs: blogsWithCollections, curPageNum: pageNum, collectionId: "default"});
+                                res.render("index", {pagesCnt: pages, blogs: result, curPageNum: pageNum, collectionId: "default"});
                             });
                             
                             if (result.length === 0)
@@ -126,13 +118,7 @@ indexMiddleware.getBlogListPageNum = function ()
                                     var curCollectionId = result[idx].blogCollectionId || 0;
                                     dbtools.getBlogCollectionById(curCollectionId, function(error, data)
                                     {
-                                        var curBlog = {};
-                                        curBlog._id = result[idx]._id;
-                                        curBlog.title = result[idx].title;
-                                        curBlog.content = result[idx].content;
-                                        curBlog.lastEditDate = result[idx].lastEditDate;
-                                        if (data) curBlog.blogCollection = data.title;
-                                        
+                                        if (data) result[idx].blogCollection = data.title;
                                         dbtools.getCommentsCountByBlogId(result[idx]._id, function (error, commentCount)
                                         {
                                             if (error)
@@ -141,8 +127,7 @@ indexMiddleware.getBlogListPageNum = function ()
                                             }
                                             else
                                             {
-                                                curBlog.commentCount = commentCount;
-                                                blogsWithCollections.push(curBlog);
+                                                result[idx].commentCount = commentCount;
                                                 finishCnt++;
                                                 if (finishCnt >= result.length) eventEmitter.emit("render");
                                             }
