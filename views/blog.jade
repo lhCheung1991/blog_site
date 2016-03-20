@@ -32,6 +32,20 @@ block content
                                 a(href="#") #{comment.replyToName} 
                             h5(style="color: #49bf9d") #{comment.commentDate}
                             p !{comment.commentContent}
+                            
+                            if comment.isHost == 0
+                                ul.media-list
+                                    li.media
+                                        div.media-left.media-top
+                                            span.glyphicon.glyphicon-comment
+                                        div.media-body
+                                            h4.media-heading 
+                                                span(style="color: #F0E916") #{comment.originalComment.nickName} 
+                                                span said
+                                            div(style="background: rgba(0, 0, 0, 0.1)")
+                                                h5(style="color: #49bf9d") #{comment.originalComment.commentDate}
+                                                p !{comment.originalComment.commentContent}
+                            
                         span.btn.btn-primary.btn-generate-editor(type="button") 回复
                             input(type="hidden" value="#{comment.blogId}" name="blogId")
                             input(type="hidden" value="#{comment._id}" name="replyToId")

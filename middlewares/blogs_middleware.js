@@ -41,25 +41,98 @@ blogsMiddleware.checkBlog = function ()
                         next();
                     }
                     else
-                    {
-                        if (result.blogCollectionId === "")
+                    {   
+                        var handledCommentsCnt = 0;
+                        for (let idx = 0; idx < comments.length; idx++)
                         {
-                            res.render("blog", {blog: result, comments: comments, relativeBlogs: {}});
-                        }
-                        else
-                        {
-                            dbtools.getBlogsByBlogCollectionId(result.blogCollectionId, function(err, results)
+                            if (comments[idx].replyToId !== "000000000000")
                             {
-                                if (error)
+                                dbtools.getCommentById(comments[idx].replyToId, function (error, oriCom)
                                 {
-                                    next();
-                                }
-                                else
+                                    if (error)
+                                    {
+                                        next();
+                                    }
+                                    else
+                                    {
+                                        comments[idx].isHost = 0;
+                                        comments[idx].originalComment = oriCom[0];
+                                        handledCommentsCnt++;
+                                        if (handledCommentsCnt >= comments.length)
+                                        {
+                                            if (result.blogCollectionId === "")
+                                            {
+                                                res.render("blog", {blog: result, comments: comments, relativeBlogs: {}});
+                                            }
+                                            else
+                                            {
+                                                dbtools.getBlogsByBlogCollectionId(result.blogCollectionId, function(err, results)
+                                                {
+                                                    if (error)
+                                                    {
+                                                        next();
+                                                    }
+                                                    else
+                                                    {
+                                                        res.render("blog", {blog: result, comments: comments, relativeBlogs: results});
+                                                    }
+                                                });   
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                comments[idx].isHost = 1;
+                                comments[idx].originalComment = undefined;
+                                handledCommentsCnt++;
+                                if (handledCommentsCnt >= comments.length)
                                 {
-                                    res.render("blog", {blog: result, comments: comments, relativeBlogs: results});
+                                    if (result.blogCollectionId === "")
+                                    {
+                                        res.render("blog", {blog: result, comments: comments, relativeBlogs: {}});
+                                    }
+                                    else
+                                    {
+                                        dbtools.getBlogsByBlogCollectionId(result.blogCollectionId, function(err, results)
+                                        {
+                                            if (error)
+                                            {
+                                                next();
+                                            }
+                                            else
+                                            {
+                                                res.render("blog", {blog: result, comments: comments, relativeBlogs: results});
+                                            }
+                                        });   
+                                    }                
                                 }
-                            });   
+                            }
                         }
+                        
+                        if (comments.length === 0)
+                        {
+                            if (result.blogCollectionId === "")
+                            {
+                                res.render("blog", {blog: result, comments: comments, relativeBlogs: {}});
+                            }
+                            else
+                            {
+                                dbtools.getBlogsByBlogCollectionId(result.blogCollectionId, function(err, results)
+                                {
+                                    if (error)
+                                    {
+                                        next();
+                                    }
+                                    else
+                                    {
+                                        res.render("blog", {blog: result, comments: comments, relativeBlogs: results});
+                                    }
+                                });   
+                            }   
+                        }
+                        
                     }
                 });   
             }
