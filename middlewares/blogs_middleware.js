@@ -194,7 +194,7 @@ function sendMail(sendToMails, reply, replyTo, content, blogId)
         to: sendToMails, // list of receivers
         subject: 'Notification from site of Linghan Cheung', // Subject line
         // text: 'Hello world 🐴', // plaintext body
-        html: "<h2>您在Linghan Cheung's Site的评论有人回应了!<h2>" + "<h3>" + reply + " 回复了您(" + replyTo + ")以下内容.</h3>" + content + "<h3><a href='http://localhost:3000/blogs/checkblog?blogId=" + blogId + "#defaultCommentEditor'>请跳转到网站查看详情</a></h3>"// html body
+        html: "<h2>您在Linghan Cheung's Site的评论有人回应了!<h2>" + "<h3>" + reply + " 回复了您(" + replyTo + ")以下内容.</h3>" + content + "<h3><a href='http://www.lhcheung1991.cn/blogs/checkblog?blogId=" + blogId + "#defaultCommentEditor'>请跳转到网站查看详情</a></h3>"// html body
     };
     
     // send mail with defined transport object

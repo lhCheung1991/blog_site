@@ -19,6 +19,7 @@ block content
                     !{blog.content}
                 hr
                 h2 History Comments
+                    a(name="defaultCommentEditor")
                 hr
                 //- comment block begin
                 each comment, idx in comments
@@ -55,7 +56,7 @@ block content
                 
                 //- default reply form begin
                 h2 Comment to this artical
-                    a(name="defaultCommentEditor")
+                    //- a(name="defaultCommentEditor")
                 form.form-horizontal(action="/blogs/commitcomment/" method="post")
                     input(type="hidden" value="#{blog._id}" name="blogId")
                     input(type="hidden" value="000000000000" name="replyToId")
