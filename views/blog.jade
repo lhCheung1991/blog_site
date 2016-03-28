@@ -1,6 +1,8 @@
 extend layout
 
 block individual_css
+    link(href="ueditor/third-party/SyntaxHighlighter/syntaxhighlighter/styles/shCore.css" rel="stylesheet")
+    link(href="ueditor/third-party/SyntaxHighlighter/syntaxhighlighter/styles/shThemeDjango.css" rel="stylesheet")
     link(href="stylesheets/blog.css" rel="stylesheet") 
 
 block content
@@ -95,7 +97,9 @@ block content
                             each relBlog, idx in relativeBlogs
                                 li
                                     a(href="/blogs/checkblog?blogId=#{relBlog._id}")= relBlog.title                  
-        //- blog row end  
+        //- blog row end
+    script(type="text/javascript" src="ueditor/third-party/SyntaxHighlighter/shCore.js")
+    script(type="text/javascript" src="ueditor/third-party/SyntaxHighlighter/syntaxhighlighter/scripts/shAutoloader.js")  
     //- 配置文件
     script(type="text/javascript" src="ueditor/ueditor.config.js")
     //- 编辑器源码文件
