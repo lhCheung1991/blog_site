@@ -61,9 +61,11 @@ block content
             section#one
                 header.major
                     h2= blog.title
-                    h4(style="color: #F0E916")= blog.blogCollection
-                    h5(style="color: #49bf9d")= blog.lastEditDate
-                    h5(style="color: #00B7FF") #{blog.commentCount} comments
+                    span(style="color: #F0E916")= blog.blogCollection
+                    span &nbsp&nbsp&nbsp&nbsp
+                    span(style="color: #00B7FF") #{blog.commentCount} comments
+                    span &nbsp&nbsp&nbsp&nbsp
+                    span(style="color: #49bf9d")= blog.lastEditDate
                 div(style="height: 150px; overflow: hidden")
                     p !{blog.content}
                 ul.actions
