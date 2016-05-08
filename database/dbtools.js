@@ -18,8 +18,8 @@ var dbtools = {};
 
 mongoose.connect("mongodb://127.0.0.1:27017/blog_site_db", 
 {
-    user: "root",
-    pass: "root"
+    user: "blogdbadmin",
+    pass: "blogdbadmin"
 });
 
 /**
