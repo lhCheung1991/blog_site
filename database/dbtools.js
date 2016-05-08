@@ -16,7 +16,11 @@ var dbtools = {};
  * In this case access your model through the connection you created
  */
 
-mongoose.connect("mongodb://127.0.0.1:27017/blog_site_db");
+mongoose.connect("mongodb://127.0.0.1:27017/blog_site_db", 
+{
+    user: "root",
+    pass: "root"
+});
 
 /**
  * Models are defined through the Schema interface
